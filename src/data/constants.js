@@ -263,8 +263,8 @@ export const projects = [
       "/project3.png",
     tags: ["Python", "CNN", "LSTM", "NLP", "TensorFlow", "OpenCV"],
     category: "machine learning",
-    github: "https://github.com/rishavchanda/Brain-Tumor-Detection",
-    webapp: "https://brain-tumor.netlify.app/",
+    github: "#",
+    webapp: "#",
     member: [
       {
         name: "Nisarga B D",
