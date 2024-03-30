@@ -268,12 +268,12 @@ export const projects = [
     member: [
       {
         name: "Nisarga B D",
-        img: "./public../../teammate1.JPG",
+        img: "/teammate1.png",
         linkedin: "https://www.linkedin.com/in/nisarga-b-d/",
       },
       {
         name: "Nisarga B R",
-        img: "./public../../teammate2.JPG",
+        img: "/teammate2.png",
         linkedin: "https://www.linkedin.com/in/nisarga-b-r-963544228/",
       },
     ],
