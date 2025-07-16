@@ -197,7 +197,7 @@ const index = ({ openModal, setOpenModal }) => {
                         }}
                         onClick={() => setOpenModal({ state: false, project: null })}
                     />
-                    <Image src={project?.image} />
+                    <Image src={project?.image} alt={project?.title ? `${project.title} project screenshot` : "Project screenshot"} />
                     <Title>{project?.title}</Title>
                     <Date>{project.date}</Date>
                     <Tags>
@@ -212,7 +212,7 @@ const index = ({ openModal, setOpenModal }) => {
                             <Members>
                                 {project?.member.map((member) => (
                                     <Member>
-                                        <MemberImage src={member.img} />
+                                        <MemberImage src={member.img} alt={member.name ? `${member.name} profile photo` : "Team member photo"} />
                                         <MemberName>{member.name}</MemberName>
                                         <a href={member.github} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
                                             <GitHub />

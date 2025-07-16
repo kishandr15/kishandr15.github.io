@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kishandr15.vercel.app/sitemap.xml 
