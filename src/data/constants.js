@@ -204,7 +204,7 @@ export const education = [
     school: "Adichunchanagiri Institute of Technology, Chikmagalur",
     date: "July 2020 - May 2024",
     grade: "8.0 CGPA",
-    desc: "I am currently pursuing a Bachelor's degree in Information Science and Engineering at Adichunchanagiri Institute of Technology, Chikmagalur. I have completed 7 semesters and have a CGPA of 8. I have taken courses in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks, among others.",
+    desc: "I have completed my Bachelor's degree in Information Science and Engineering at Adichunchanagiri Institute of Technology, Chikmagalur. Throughout the 8 semesters, I maintained a CGPA of 8.0 and completed courses such as Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks.",
     degree: "Bachelor of Engineering, Information Science and Engineering",
   },
   {
@@ -230,6 +230,30 @@ export const education = [
 export const projects = [
   {
     id: 0,
+    title: "WHEREABOUTS | Anti-Money Laundering Platform",
+    date: "June 2024 - Present",
+    description:
+      "Architected comprehensive Anti-Money Laundering platform with KYC, Customer-360, and Name Screening modules for banking compliance. Built internal alert systems and branch-level CTR/STR reports for suspicious behavior tracking. Developed responsive Angular front-end and Spring Boot REST APIs, delivering 99% uptime production-grade services. Designed and optimized Oracle/MS SQL stored procedures, increasing data retrieval efficiency.",
+    image: "/aml.png",
+    tags: ["Java", "Spring Boot", "Angular", "TypeScript", "REST APIs", "Oracle", "Microsoft SQL Server", "Microservices"],
+    category: "web app",
+    github: "#",
+    webapp: "#",
+  },
+  {
+    id: 1,
+    title: "DILIGENCE | Anomaly Detection Platform",
+    date: "June 2024 - Present",
+    description:
+      "Implemented advanced anomaly detection platform using Isolation Forest model to detect anomalous transactions and mule accounts. Engineered interactive ML dashboards enabling behavioral analytics for risk assessment. Integrated machine learning for anomaly detection, reducing false positives by 15%. Contributed to IFRS 9 ECL calculation module including PD models, Z-scores, and transition matrices.",
+    image: "/anomally.png",
+    tags: ["Python", "Scikit-learn", "Pandas", "Angular", "Oracle", "Java", "FastAPI", "Machine Learning"],
+    category: "machine learning",
+    github: "#",
+    webapp: "#",
+  },
+  {
+    id: 2,
     title: "Art Gallery Management System | DBMS",
     date: "Apr 2023 - May 2023",
     description:
@@ -241,7 +265,7 @@ export const projects = [
     webapp: "https://agms2404.000webhostapp.com/index.php",
   },
   {
-    id: 1,
+    id: 3,
     title: "Real-Time & Forecast Weather App",
     date: "Febraury 2024 - March 2024",
     description:
@@ -261,8 +285,8 @@ export const projects = [
     webapp: "https://weather-app-using-react-two.vercel.app/",
   },
   {
-    id: 2,
-    title: "Image Caption Generator for Visually Impaired (ongoing)",
+    id: 4,
+    title: "Image Caption Generator for Visually Impaired",
     date: "December 2023 - Present",
     description:
       "Developing a model that generates captions for images to assist visually impaired individuals. Utilized cnn-lstm architecture to extract features from images and generate captions using the Flickr8k dataset. Implemented the model using TensorFlow and Keras, achieving an accuracy of 80% on the test dataset.",
@@ -285,96 +309,41 @@ export const projects = [
       },
     ],
   },
-
-  {
-    id: 3,
-    title: "Spotify Clone",
-    description:
-      "Crafted  a  personalized  Spotify  Clone,  spotlighting  my  top  10  favorite  songs. It  offers  seamless  interactions  for  pausing,  playing,  and  navigating  between  tracks  with  forward  and  backward controls.",
-    image:
-      "/project5.png",
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
-    category: "web app",
-    github: "https://github.com/kishandr15/Spotify-Clone-using-HTML-CSS-JavaScript",
-    webapp: "https://kishandr15.github.io/Spotify-Clone-using-HTML-CSS-JavaScript/",
-  },
-
-  {
-    id: 4,
-    title: "Apple Inspired Calculator using React Js",
-    description:
-      "This is a simple calculator app built with React, designed to resemble the style of the Apple calculator app. It includes basic arithmetic operations such as addition, subtraction, multiplication, and division.",
-    image:
-      "/project4.png",
-    tags: [
-      "React Js",
-      "JavaScript",
-      "Vite",
-      "vercel",
-    ],
-    category: "web app",
-    github: "https://github.com/kishandr15/apple-inspired-calc-react",
-    webapp: "https://apple-inspired-calc-react.vercel.app/",
-  },
-
+  // {
+  //   id: 5,
+  //   title: "Spotify Clone",
+  //   description:
+  //     "Crafted  a  personalized  Spotify  Clone,  spotlighting  my  top  10  favorite  songs. It  offers  seamless  interactions  for  pausing,  playing,  and  navigating  between  tracks  with  forward  and  backward controls.",
+  //   image:
+  //     "/project5.png",
+  //   tags: [
+  //     "HTML",
+  //     "CSS",
+  //     "JavaScript",
+  //   ],
+  //   category: "web app",
+  //   github: "https://github.com/kishandr15/Spotify-Clone-using-HTML-CSS-JavaScript",
+  //   webapp: "https://kishandr15.github.io/Spotify-Clone-using-HTML-CSS-JavaScript/",
+  // },
+  // {
+  //   id: 6,
+  //   title: "Simple Landing Page | Apple",
+  //   description:
+  //     "Designed a simple landing page inspired by Apple's website. The page features a responsive design with a navigation bar, hero section, product features, and a footer. Implemented the design using HTML, CSS, and JavaScript.",
+  //   image:
+  //     "/project6.png",
+  //   tags: [
+  //     "HTML",
+  //     "CSS",
+  //     "JavaScript",
+  //     "Tailwind CSS",
+  //   ],
+  //   category: "web app",
+  //   github: "https://github.com/kishandr15/Landing-Page",
+  //   webapp: "https://landing-page-beta-ecru.vercel.app/",
+  // },
   {
     id: 5,
-    title: "Simple Landing Page | Apple",
-    description:
-      "Designed a simple landing page inspired by Apple's website. The page features a responsive design with a navigation bar, hero section, product features, and a footer. Implemented the design using HTML, CSS, and JavaScript.",
-    image:
-      "/project6.png",
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Tailwind CSS",
-    ],
-    category: "web app",
-    github: "https://github.com/kishandr15/Landing-Page",
-    webapp: "https://landing-page-beta-ecru.vercel.app/",
-  },
-  {
-    id: 7,
-    title: "Tic Tac Toe Game",
-    description:
-      "Developed a classic Tic Tac Toe game that allows two players to take turns marking the spaces on a 3x3 grid. The game displays the winner or a draw when the game ends. Implemented using HTML, CSS, and JavaScript.",
-    image:
-      "/project8.png",
-    tags: [
-      "React Js",
-      "JavaScript",
-      "HTML",
-      "CSS",
-    ],
-    category: "web app",
-    github: "https://github.com/kishandr15/TIC-TAC-TOE-Game",
-    webapp: "https://tic-tac-toe-game-five-kappa.vercel.app/",
-  },
-
-  {
-    id: 8,
-    title: "Drum Kit",
-    description:
-      " Developed a virtual drum kit that allows users to play drum sounds by pressing corresponding keys on the keyboard. The kit includes a variety of drum sounds and animations for an engaging user experience.",
-    image:
-      "/project7.png",
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
-    category: "web app",
-    github: "https://github.com/kishandr15/Drum-Kit-using-HTML-CSS-JS",
-    webapp: "https://kishandr15.github.io/Drum-Kit-using-HTML-CSS-JS/",
-  },
-
-  {
-    id: 9,
     title: "Jarvis AI Assistant | Python",
     description:
       "Built a voice-controlled AI assistant in Hackathon 2.0 in collaboration with Cognito Club.",
@@ -384,6 +353,4 @@ export const projects = [
     category: "machine learning",
     github: "https://github.com/kishandr15/JarvisAI-Python",
   },
-
-
 ];

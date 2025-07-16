@@ -103,7 +103,7 @@ function Footer() {
           {/* <SocialMediaIcon href={Bio.linktree} target="display"><Linktree /></SocialMediaIcon> */}
         </SocialMediaIcons>
         <Copyright>
-          &copy; 2024 Kishan DR. All rights reserved.
+          &copy; 2025 Kishan DR. All rights reserved.
         </Copyright>
 
       </FooterWrapper>
