@@ -53,11 +53,21 @@ color: ${({ theme }) => theme.text_primary};
   text-decoration: none;
   font-size: 1.2rem;
   transition: color 0.2s ease-in-out;
+  padding: 8px 4px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  
   &:hover {
     color: ${({ theme }) => theme.primary};
   }
   @media (max-width: 768px) {
     font-size: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 6px 2px;
   }
 `;
 
@@ -72,8 +82,19 @@ const SocialMediaIcon = styled.a`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.text_primary};
   transition: color 0.2s ease-in-out;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   &:hover {
     color: ${({ theme }) => theme.primary};
+  }
+  
+  @media (max-width: 480px) {
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
   }
 `;
 

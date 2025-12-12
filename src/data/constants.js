@@ -1,8 +1,8 @@
 export const Bio = {
   name: "Kishan DR",
   roles: [
-    "Software Developer",
-    "Programmer",
+    "Frontend Developer",
+    "Software Engineer",
   ],
   description:
     "Passionate Software Developer with hands-on experience in front-end and back-end development, alongside skills in machine learning for predictive modeling. Proficient in building responsive applications, API integration, and database optimization, I’m eager to contribute to impactful projects and expand my technical expertise.",
@@ -18,6 +18,11 @@ export const skills = [
   {
     title: "Frontend",
     skills: [
+      {
+        name: "React",
+        image:
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg",
+      },  
       {
         name: "Angular",
         image:
@@ -52,6 +57,12 @@ export const skills = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1024px-Tailwind_CSS_Logo.svg.png?20230715030042",
       },
+
+      {
+        name: "Tanstack Query",
+        image:
+          "https://avatars.githubusercontent.com/u/72518640?s=200&v=4",
+      },
     ],
   },
   {
@@ -81,6 +92,11 @@ export const skills = [
         name: "MongoDB",
         image:
           "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg",
+      },
+      {
+        name: "REST API",
+        image:
+          "https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/rest-api-icon.png",
       },
     ],
   },
@@ -123,6 +139,27 @@ export const skills = [
         image:
           "https://raw.githubusercontent.com/devicons/devicon/master/icons/jupyter/jupyter-original-wordmark.svg",
       },
+      {
+        name: "Data Visualization",
+        image:
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/d3js/d3js-original.svg",
+      },
+      {
+        name: "Testing",
+        image:
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/jest/jest-plain.svg",
+      },
+      {
+        name: "Performance Optimization",
+        image:
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/chrome/chrome-original-wordmark.svg",
+      },
+      {
+        name: "Accessibility",
+        image:
+          "https://w7.pngwing.com/pngs/421/864/png-transparent-web-accessibility-computer-icons-internet-user-interface-blue-search-engine-optimization-trademark.png",
+      },
+      
     ],
   },
 ];
@@ -130,10 +167,44 @@ export const skills = [
 export const experiences = [
   {
     id: 0,
+    img: "https://www.matters.ai/icon0.svg?1454d8ccc96992c9",
+    role: "Frontend Developer",
+    company: "Matters.AI",
+    date: "August 2025 - Present",
+    desc: "Contributing to the UI/UX of enterprise-grade security dashboards and tools powering Matters.AI’s AI-native data protection platform - a context-aware system that proactively understands and protects sensitive data across cloud, SaaS, and endpoints. Matters.AI unifies DSPM, insider risk, exfiltration defense, and DLP into a single intelligent layer using semantic intelligence and predictive reasoning.",
+    skills: [
+      // Core Frontend
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+
+      // Product-Specific / Relevant to Matters.AI
+      "Data Visualization",
+      "Tanstack Query",
+      "Building Complex Dashboards",
+      "Component Architecture & Reusable UI Patterns",
+
+      // API & Integration
+      "REST API Integration",
+
+      // Quality & Performance
+      "Performance Optimization",
+      "Accessibility",
+      "Testing",
+
+      // DevOps, Tools & Collaboration
+      "Git & GitHub",
+    ],
+  },
+  {
+    id: 1,
     img: "https://cyberrealmlabs.com/wp-content/uploads/2023/11/cropped-CRL_CompanyLogo.png",
     role: "Software Developer",
     company: "Cyber Realm Labs",
-    date: "June 2024 - Present",
+    date: "June 2024 - July 2025",
     desc: "Developing a anti-money laundering (AML) software solution with prevention , compliance, automation, and analytics capabilities.",
     skills: [
       "Java",
@@ -149,7 +220,7 @@ export const experiences = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0HC-QdA7uLSHKSKw5vzXyT6Bvmgv41RBxH3e3n77LnA&s",
     role: "Full Stack Web Developer Intern",
     company: "Webstack Academy",
@@ -168,7 +239,7 @@ export const experiences = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     img: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/h5u5zajigmvue00dsmrn",
     role: "SAP Analytics Cloud Intern",
     company: "VASPP",
@@ -181,7 +252,7 @@ export const experiences = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRywAnohj9sXEIuFbE1K_pGED8cYVWfgNebzjdz6etCOw&s",
     role: "Web Development Internship ",
     company: "Varcons Technologies Pvt. Ltd.",

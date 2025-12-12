@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import _default from '../../themes/default';
 
 export const Container = styled.div`
     background: linear-gradient(343.07deg, rgba(132, 59, 206, 0.06) 5.71%, rgba(132, 59, 206, 0) 64.83%);
@@ -58,26 +57,52 @@ export const ToggleButtonGroup = styled.div`
     border-radius: 12px;
     font-weight: 500;
     margin: 22px 0px;
+    flex-wrap: wrap;
+    justify-content: center;
+    
     @media (max-width: 768px) {
         font-size: 12px;
+        margin: 18px 0px;
+    }
+    
+    @media (max-width: 480px) {
+        font-size: 11px;
+        margin: 16px 0px;
+        border-radius: 10px;
     }
 `
 
 export const ToggleButton = styled.div`
-    padding: 8px 18px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
     ${({ active, theme }) =>
-        active && `
-    background: ${theme.primary + 20};
+        active ? `
+    background: ${theme.primary};
+    color: ${theme.white};
+    box-shadow: ${theme.shadow_md};
+    ` : `
+    color: ${theme.text_primary};
     `
     }
     &:hover {
-        background: ${({ theme }) => theme.primary + 8};
+        background: ${({ theme, active }) => active ? theme.primary : theme.primary + 15};
+        transform: translateY(-2px);
+        box-shadow: ${({ theme, active }) => active ? theme.shadow_md : 'none'};
     }
     @media (max-width: 768px) {
-        padding: 6px 8px;
-        border-radius: 4px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        min-height: 36px;
+    }
+    
+    @media (max-width: 480px) {
+        padding: 6px 10px;
+        font-size: 10px;
+        min-height: 32px;
     }
 `
 export const Divider = styled.div`
@@ -92,14 +117,15 @@ export const CardContainer = styled.div`
     align-items: center;
     gap: 28px;
     flex-wrap: wrap;
-    // display: grid;
-    // grid-template-columns: repeat(3, 1fr);
-    // grid-gap: 32px;
-    // grid-auto-rows: minmax(100px, auto);
-    // @media (max-width: 960px) {
-    //     grid-template-columns: repeat(2, 1fr);
-    // }
-    // @media (max-width: 640px) {
-    //     grid-template-columns: repeat(1, 1fr);
-    // }
+    padding: 0 20px;
+    
+    @media (max-width: 768px) {
+        gap: 20px;
+        padding: 0 16px;
+    }
+    
+    @media (max-width: 480px) {
+        gap: 16px;
+        padding: 0 12px;
+    }
 `;

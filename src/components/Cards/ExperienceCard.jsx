@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 const Document = styled.img`
@@ -35,21 +35,51 @@ text-overflow: ellipsis;
 
 const Card = styled.div`
     width: 650px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: ${({ theme }) => theme.shadow_md};
+    padding: 20px 24px;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    transition: all 0.3s ease-in-out;
-    &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        transform: translateY(-5px);
+    gap: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: ${({ theme }) => theme.card};
+    border: 1px solid ${({ theme }) => theme.primary + 20};
+    margin: 0;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: ${({ theme }) => theme.gradient_primary};
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.4s ease;
     }
-    @media only screen and (max-width: 768px){
+    
+    &:hover{
+        box-shadow: ${({ theme }) => theme.shadow_lg};
+        transform: translateY(-8px);
+        border-color: ${({ theme }) => theme.primary};
+        background: ${({ theme }) => theme.card_hover || theme.card_light};
+    }
+    
+    &:hover::before {
+        transform: scaleY(1);
+    }
+    
+    @media (max-width: 768px){
+        padding: 10px;
+        gap: 8px;
+        width: 300px;
+    }
+    
+    @media (max-width: 480px){
         padding: 10px;
         gap: 8px;
         width: 300px;
@@ -62,11 +92,7 @@ const Card = styled.div`
     &:hover ${Span}{
         overflow: visible;
         -webkit-line-clamp: unset;
-
     }
-
-    border: 0.1px solid #306EE8;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
 `
 
 const Top = styled.div`
@@ -76,12 +102,24 @@ const Top = styled.div`
 `
 
 const Image = styled.img`
-    height: 50px;
-    background-color: #000;
-    border-radius: 10px;
+    height: 56px;
+    width: 56px;
+    background-color: ${({ theme }) => theme.white};
+    border-radius: 12px;
     margin-top: 4px;
+    object-fit: contain;
+    padding: 4px;
+    border: 1px solid ${({ theme }) => theme.primary + 20};
+    transition: all 0.3s ease;
+    
+    ${Card}:hover & {
+        transform: scale(1.1);
+        border-color: ${({ theme }) => theme.primary};
+    }
+    
     @media only screen and (max-width: 768px){
-        height: 40px;
+        height: 44px;
+        width: 44px;
     }
 `
 
@@ -93,11 +131,12 @@ const Body = styled.div`
 
 
 const Role = styled.div`
-    font-size: 18px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text_primary + 99};
+    font-size: 20px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.text_primary};
+    margin-bottom: 4px;
     @media only screen and (max-width: 768px){
-        font-size: 14px;
+        font-size: 16px;
     }
 `
 
@@ -134,11 +173,23 @@ const ItemWrapper = styled.div`
 `
 
 const Skill = styled.div`
-    font-size: 15px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_primary + 99};
+    font-size: 13px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.text_primary};
+    background: ${({ theme }) => theme.primary + 15};
+    border: 1px solid ${({ theme }) => theme.primary + 30};
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: ${({ theme }) => theme.primary + 25};
+        border-color: ${({ theme }) => theme.primary};
+    }
+    
     @media only screen and (max-width: 768px){
-        font-size: 12px;
+        font-size: 11px;
+        padding: 3px 8px;
     }
 `
 
@@ -148,7 +199,12 @@ const ExperienceCard = ({ experience }) => {
     return (
         <Card>
             <Top>
-                <Image src={experience.img} alt={experience.company ? `${experience.company} logo` : "Company logo"} />
+                <Image 
+                    src={experience.img} 
+                    alt={experience.company ? `${experience.company} logo` : "Company logo"}
+                    loading="lazy"
+                    decoding="async"
+                />
                 <Body>
                     <Role>{experience.role}</Role>
                     <Company>{experience.company}</Company>
@@ -167,7 +223,7 @@ const ExperienceCard = ({ experience }) => {
                             <b>Skills:</b>
                             <ItemWrapper>
                                 {experience?.skills?.map((skill, index) => (
-                                    <Skill>• {skill}</Skill>
+                                    <Skill key={`exp-skill-${index}-${skill}`}>• {skill}</Skill>
                                 ))}
                             </ItemWrapper>
                         </Skills>
@@ -183,4 +239,4 @@ const ExperienceCard = ({ experience }) => {
     )
 }
 
-export default ExperienceCard
+export default memo(ExperienceCard)

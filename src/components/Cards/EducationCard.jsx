@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 const Document = styled.img`
@@ -132,7 +132,12 @@ const EducationCard = ({ education }) => {
     return (
         <Card>
             <Top>
-                <Image src={education.img} alt={education.school ? `${education.school} logo` : "Education logo"} />
+                <Image 
+                    src={education.img} 
+                    alt={education.school ? `${education.school} logo` : "Education logo"}
+                    loading="lazy"
+                    decoding="async"
+                />
                 <Body>
                     <Name>{education.school}</Name>
                     <Degree>{education.degree}</Degree>
@@ -147,4 +152,4 @@ const EducationCard = ({ education }) => {
     )
 }
 
-export default EducationCard
+export default memo(EducationCard)

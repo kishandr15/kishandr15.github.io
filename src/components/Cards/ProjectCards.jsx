@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 
@@ -17,24 +17,58 @@ const Button = styled.button`
 `
 const Card = styled.div`
     width: 330px;
-    height: 490px;
+    min-height: 490px;
     background-color: ${({ theme }) => theme.card};
     cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 0 0 12px 4px rgba(0,0,0,0.4);
+    border-radius: 16px;
+    border: 1px solid ${({ theme }) => theme.primary + 20};
+    box-shadow: ${({ theme }) => theme.shadow_md};
     overflow: hidden;
     padding: 26px 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    transition: all 0.5s ease-in-out;
-    &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 50px 4px rgba(0,0,0,0.6);
-        filter: brightness(1.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: ${({ theme }) => theme.gradient_primary};
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
     }
+    
+    &:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: ${({ theme }) => theme.shadow_lg};
+        border-color: ${({ theme }) => theme.primary};
+        background-color: ${({ theme }) => theme.card_hover || theme.card_light};
+    }
+    
+    &:hover::before {
+        transform: scaleX(1);
+    }
+    
     &:hover ${Button} {
         display: block;
+    }
+    
+    @media (max-width: 768px) {
+        width: calc(100% - 32px);
+        max-width: 400px;
+        min-height: auto;
+    }
+    
+    @media (max-width: 480px) {
+        width: calc(100% - 24px);
+        padding: 20px 16px;
+        gap: 12px;
     }
 `
 
@@ -42,8 +76,14 @@ const Image = styled.img`
     width: 100%;
     height: 180px;
     background-color: ${({ theme }) => theme.white};
-    border-radius: 10px;
-    box-shadow: 0 0 16px 2px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: ${({ theme }) => theme.shadow_sm};
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    
+    ${Card}:hover & {
+        transform: scale(1.05);
+    }
 `
 
 const Tags = styled.div`
@@ -56,12 +96,19 @@ const Tags = styled.div`
 `
 
 const Tag = styled.span`
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 500;
     color: ${({ theme }) => theme.primary};
-    background-color: ${({ theme }) => theme.primary + 15};
-    padding: 2px 8px;
-    border-radius: 10px;
+    background-color: ${({ theme }) => theme.primary + 20};
+    padding: 4px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid ${({ theme }) => theme.primary + 30};
+    
+    &:hover {
+        background-color: ${({ theme }) => theme.primary + 30};
+        transform: translateY(-1px);
+    }
 `
 
 const Details = styled.div`
@@ -73,8 +120,8 @@ const Details = styled.div`
 `
 const Title = styled.div`
     font-size: 20px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text_secondary};
+    font-weight: 700;
+    color: ${({ theme }) => theme.text_primary};
     overflow: hidden;
     display: -webkit-box;
     max-width: 100%;
@@ -82,6 +129,7 @@ const Title = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.4;
 `
 
 const Date = styled.div`
@@ -125,10 +173,15 @@ const Avatar = styled.img`
 const ProjectCards = ({project,setOpenModal}) => {
     return (
         <Card onClick={() => setOpenModal({state: true, project: project})}>
-            <Image src={project.image} alt={project.title ? `${project.title} project screenshot` : "Project screenshot"} />
+            <Image 
+                src={project.image} 
+                alt={project.title ? `${project.title} project screenshot` : "Project screenshot"}
+                loading="lazy"
+                decoding="async"
+            />
             <Tags>
                 {project.tags?.map((tag, index) => (
-                <Tag>{tag}</Tag>
+                <Tag key={`tag-${index}-${tag}`}>{tag}</Tag>
                 ))}
             </Tags>
             <Details>
@@ -137,8 +190,13 @@ const ProjectCards = ({project,setOpenModal}) => {
                 <Description>{project.description}</Description>
             </Details>
             <Members>
-                {project.member?.map((member) => (
-                    <Avatar src={member.img} alt={member.name ? `${member.name} profile photo` : "Team member photo"} />
+                {project.member?.map((member, index) => (
+                    <Avatar 
+                        key={`member-${index}-${member.name}`} 
+                        src={member.img} 
+                        alt={member.name ? `${member.name} profile photo` : "Team member photo"}
+                        loading="lazy"
+                    />
                 ))}
             </Members>
             {/* <Button>View Project</Button> */}
@@ -146,4 +204,4 @@ const ProjectCards = ({project,setOpenModal}) => {
     )
 }
 
-export default ProjectCards
+export default memo(ProjectCards)
