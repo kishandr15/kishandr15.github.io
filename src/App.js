@@ -1,26 +1,38 @@
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { useState } from "react";
 import { HelmetProvider } from 'react-helmet-async';
 import { darkTheme, lightTheme } from './utils/Themes.js'
+import { ThemeProvider, useTheme } from './contexts/ThemeContext.js';
 import Navbar from "./components/Navbar";
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import HeroSection from "./components/HeroSection";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import InteractiveCursor from "./components/InteractiveCursor";
 import SEO from "./components/SEO";
 import SkipToMain from "./components/SkipLink";
 import styled from "styled-components";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
+import { trackPageView } from './utils/analytics';
 
 const ParticlesBackground = React.lazy(() => import('./components/ParticlesBackground'));
 const ProjectDetails = React.lazy(() => import('./components/ProjectDetails'));
 const Experience = React.lazy(() => import('./components/Experience'));
 const Education = React.lazy(() => import('./components/Education'));
 const Skills = React.lazy(() => import('./components/Skills'));
+const Projects = React.lazy(() => import('./components/Projects'));
+const Contact = React.lazy(() => import('./components/Contact'));
+const Footer = React.lazy(() => import('./components/Footer'));
+
+// Skeleton loader to prevent layout shifts
+const SkeletonLoader = styled.div`
+  min-height: ${({ height }) => height || '400px'};
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+`;
 
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -66,54 +78,73 @@ const Wrapper = styled.div`
     pointer-events: none;
   }
 `
-function App() {
-  const [darkMode] = useState(true);
+
+// Inner component that uses the theme context
+const AppContent = () => {
+  const { resolvedTheme } = useTheme();
   const [openModal, setOpenModal] = useState({ state: false, project: null });
-  
+  const currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
+
+  useEffect(() => {
+    trackPageView(window.location.pathname);
+  }, []);
+
   return (
-    <HelmetProvider>
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <Router>
-          <SEO />
-          <SkipToMain />
-          <InteractiveCursor />
-          <ScrollProgress />
-          {typeof window !== 'undefined' && window.innerWidth > 768 && (
-            <Suspense fallback={null}>
-              <ParticlesBackground />
-            </Suspense>
-          )}
+    <StyledThemeProvider theme={currentTheme}>
+      <Router>
+        <SEO />
+        <SkipToMain />
+        <InteractiveCursor />
+        <ScrollProgress />
+        {typeof window !== 'undefined' && window.innerWidth > 768 && (
+          <Suspense fallback={null}>
+            <ParticlesBackground />
+          </Suspense>
+        )}
         <Navbar />
 
         <Body>
           <HeroSection />
 
           <Wrapper>
-            <Suspense fallback={null}>
-            <Skills />
-            <Experience />
+            <Suspense fallback={<SkeletonLoader height="600px" />}>
+              <Skills />
+              <Experience />
             </Suspense>
           </Wrapper>
 
-          <Projects openModal={openModal} setOpenModal={setOpenModal} />
+          <Suspense fallback={<SkeletonLoader height="800px" />}>
+            <Projects openModal={openModal} setOpenModal={setOpenModal} />
+          </Suspense>
 
           <Wrapper>
-            <Suspense fallback={null}>
-            <Education />
+            <Suspense fallback={<SkeletonLoader height="500px" />}>
+              <Education />
+              <Contact />
             </Suspense>
-            <Contact />
           </Wrapper>
-          
-          <Footer />
+
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
           {openModal.state &&
             <Suspense fallback={null}>
-            <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
+              <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
             </Suspense>
           }
         </Body>
 
       </Router>
-    </ThemeProvider>
+    </StyledThemeProvider>
+  );
+};
+
+function App() {
+  return (
+    <HelmetProvider>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </HelmetProvider>
   );
 }

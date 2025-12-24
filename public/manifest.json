@@ -1,0 +1,26 @@
+{
+    "short_name": "Kishan D R",
+    "name": "Kishan D R - Frontend Developer Portfolio",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "aml.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "aml.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "description": "Kishan D R (kidhandr) - Frontend Developer at Matters.AI based in Channarayapatna. Portfolio showcasing React, Angular, and ML projects."
+}

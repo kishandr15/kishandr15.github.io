@@ -51,14 +51,15 @@ export const Desc = styled.div`
 
 export const ToggleButtonGroup = styled.div`
     display: flex;
-    border: 1.5px solid ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.primary};
-    font-size: 16px;
-    border-radius: 12px;
+    background: ${({ theme }) => theme.card};
+    border: 1px solid ${({ theme }) => theme.primary + 30};
+    border-radius: 50px;
+    padding: 4px;
+    font-size: 14px;
     font-weight: 500;
     margin: 22px 0px;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 4px;
+    box-shadow: ${({ theme }) => theme.shadow_sm};
     
     @media (max-width: 768px) {
         font-size: 12px;
@@ -68,64 +69,77 @@ export const ToggleButtonGroup = styled.div`
     @media (max-width: 480px) {
         font-size: 11px;
         margin: 16px 0px;
-        border-radius: 10px;
+        flex-wrap: wrap;
     }
 `
 
 export const ToggleButton = styled.div`
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
+    white-space: nowrap;
+    position: relative;
     ${({ active, theme }) =>
         active ? `
-    background: ${theme.primary};
+    background: ${theme.gradient_primary};
     color: ${theme.white};
     box-shadow: ${theme.shadow_md};
+    transform: scale(1.02);
     ` : `
-    color: ${theme.text_primary};
+    background: transparent;
+    color: ${theme.text_secondary};
     `
     }
+    
     &:hover {
-        background: ${({ theme, active }) => active ? theme.primary : theme.primary + 15};
-        transform: translateY(-2px);
-        box-shadow: ${({ theme, active }) => active ? theme.shadow_md : 'none'};
+        ${({ active, theme }) => !active && `
+            background: ${theme.primary + 15};
+            color: ${theme.primary};
+        `}
+        transform: ${({ active }) => active ? 'scale(1.02)' : 'scale(1.05)'};
     }
+    
+    &:active {
+        transform: scale(0.98);
+    }
+    
     @media (max-width: 768px) {
-        padding: 8px 12px;
-        border-radius: 6px;
+        padding: 8px 16px;
         font-size: 11px;
-        min-height: 36px;
     }
     
     @media (max-width: 480px) {
-        padding: 6px 10px;
+        padding: 6px 12px;
         font-size: 10px;
-        min-height: 32px;
+        flex: 1;
+        text-align: center;
     }
 `
 export const Divider = styled.div`
-    width: 1.5px;
-    background: ${({ theme }) => theme.primary};
+    display: none;
 `
 
 
 export const CardContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 32px;
+    align-items: stretch;
     padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     
     @media (max-width: 768px) {
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
         padding: 0 16px;
     }
     
     @media (max-width: 480px) {
-        gap: 16px;
+        grid-template-columns: 1fr;
+        gap: 20px;
         padding: 0 12px;
     }
 `;

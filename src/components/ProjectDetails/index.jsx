@@ -1,5 +1,8 @@
-import { CloseRounded, GitHub, LinkedIn } from '@mui/icons-material';
-import { Modal } from '@mui/material';
+import CloseRounded from '@mui/icons-material/CloseRounded';
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import { FiExternalLink } from 'react-icons/fi';
+import Modal from '@mui/material/Modal';
 import React from 'react'
 import styled from 'styled-components'
 
@@ -67,10 +70,15 @@ const Desc = styled.div`
 
 const Image = styled.img`
     width: 100%;
+    max-height: 400px;
     object-fit: cover;
     border-radius: 12px;
     margin-top: 30px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    
+    @media only screen and (max-width: 600px) {
+        max-height: 300px;
+    }
 `;
 
 const Label = styled.div`
@@ -163,11 +171,15 @@ const Button = styled.a`
     padding: 12px 16px;
     border-radius: 8px;
     background-color: ${({ theme }) => theme.primary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     ${({ dull, theme }) => dull && `
         background-color: ${theme.bgLight};
         color: ${theme.text_secondary};
         &:hover {
-            background-color: ${({ theme }) => theme.bg + 99};
+            background-color: ${theme.bg + 99};
         }
     `}
     cursor: pointer;
@@ -184,10 +196,18 @@ const Button = styled.a`
 
 const index = ({ openModal, setOpenModal }) => {
     const project = openModal?.project;
+
+    const handleBackdropClick = (e) => {
+        // Only close if clicking directly on the backdrop, not its children
+        if (e.target === e.currentTarget) {
+            setOpenModal({ state: false, project: null });
+        }
+    };
+
     return (
         <Modal open={true} onClose={() => setOpenModal({ state: false, project: null })}>
-            <Container>
-                <Wrapper>
+            <Container onClick={handleBackdropClick}>
+                <Wrapper onClick={(e) => e.stopPropagation()}>
                     <CloseRounded
                         style={{
                             position: "absolute",
@@ -197,8 +217,8 @@ const index = ({ openModal, setOpenModal }) => {
                         }}
                         onClick={() => setOpenModal({ state: false, project: null })}
                     />
-                    <Image 
-                        src={project?.image} 
+                    <Image
+                        src={project?.image}
                         alt={project?.title ? `${project.title} project screenshot` : "Project screenshot"}
                         loading="lazy"
                         decoding="async"
@@ -217,16 +237,16 @@ const index = ({ openModal, setOpenModal }) => {
                             <Members>
                                 {project?.member.map((member) => (
                                     <Member>
-                                        <MemberImage 
-                                            src={member.img} 
+                                        <MemberImage
+                                            src={member.img}
                                             alt={member.name ? `${member.name} profile photo` : "Team member photo"}
                                             loading="lazy"
                                         />
                                         <MemberName>{member.name}</MemberName>
-                                        <a href={member.github} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
+                                        <a href={member.github} target="new" style={{ textDecoration: 'none', color: 'inherit' }}>
                                             <GitHub />
                                         </a>
-                                        <a href={member.linkedin} target="new" style={{textDecoration: 'none', color: 'inherit'}}>
+                                        <a href={member.linkedin} target="new" style={{ textDecoration: 'none', color: 'inherit' }}>
                                             <LinkedIn />
                                         </a>
                                     </Member>
@@ -234,10 +254,22 @@ const index = ({ openModal, setOpenModal }) => {
                             </Members>
                         </>
                     )}
-                    <ButtonGroup>
-                        <Button dull href={project?.github} target='new'>View Code</Button>
-                        <Button href={project?.webapp} target='new'>View Live App</Button>
-                    </ButtonGroup>
+                    {(project?.github && project.github !== '#') || (project?.webapp && project.webapp !== '#') ? (
+                        <ButtonGroup>
+                            {project?.github && project.github !== '#' && (
+                                <Button dull href={project.github} target='new'>
+                                    <GitHub />
+                                    View Code
+                                </Button>
+                            )}
+                            {project?.webapp && project.webapp !== '#' && (
+                                <Button href={project.webapp} target='new'>
+                                    <FiExternalLink size={20} />
+                                    View Live App
+                                </Button>
+                            )}
+                        </ButtonGroup>
+                    ) : null}
                 </Wrapper>
             </Container>
 

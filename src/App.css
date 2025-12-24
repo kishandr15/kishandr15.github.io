@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', 'Poppins', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html{
+html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-body{
+body {
   margin: 0px !important;
   padding: 0;
   font-family: 'Inter', 'Poppins', sans-serif;
@@ -24,6 +24,28 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Performance optimizations */
+#root {
+  isolation: isolate;
+}
+
+/* Optimize sections for content-visibility */
+section,
+[id="skills"],
+[id="experience"],
+[id="projects"],
+[id="education"],
+[id="contact"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Optimize images */
+img {
+  content-visibility: auto;
+}
+
 
 /* Accessibility improvements */
 :focus-visible {
@@ -49,6 +71,7 @@ body{
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -60,22 +83,22 @@ body{
 
 /* width */
 ::-webkit-scrollbar {
-    width: 4px;
-    height: 80px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background:#222A35;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #575C66;
-    border-radius: 6px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #626970;
-  }
+  width: 4px;
+  height: 80px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222A35;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #575C66;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}

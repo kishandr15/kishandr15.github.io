@@ -22,7 +22,7 @@ export const skills = [
         name: "React",
         image:
           "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg",
-      },  
+      },
       {
         name: "Angular",
         image:
@@ -159,7 +159,7 @@ export const skills = [
         image:
           "https://w7.pngwing.com/pngs/421/864/png-transparent-web-accessibility-computer-icons-internet-user-interface-blue-search-engine-optimization-trademark.png",
       },
-      
+
     ],
   },
 ];
@@ -198,6 +198,12 @@ export const experiences = [
       // DevOps, Tools & Collaboration
       "Git & GitHub",
     ],
+    impact: [
+      'Built enterprise-grade security dashboards serving 1000+ users',
+      'Improved dashboard load time by 40% through code splitting and lazy loading',
+      'Implemented reusable component library reducing development time by 30%',
+      'Achieved 95+ Lighthouse performance score across all pages',
+    ],
   },
   {
     id: 1,
@@ -217,6 +223,12 @@ export const experiences = [
       "Python",
       "Machine Learning",
       "AML",
+    ],
+    impact: [
+      'Developed AML platform processing 10,000+ transactions daily',
+      'Reduced false positives by 15% using ML-based anomaly detection',
+      'Built microservices architecture handling 99.9% uptime',
+      'Optimized database queries improving response time by 50%',
     ],
   },
   {
@@ -265,7 +277,7 @@ export const experiences = [
     desc: "Built a Cafe Shop Centre website. Design recreated from a figma template",
   },
 
- 
+
 ];
 
 export const education = [
@@ -283,7 +295,7 @@ export const education = [
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW1fqy5HyiQF-M2qx5HaRTPoMAOqocsIo9CbB7ZuG5DA&s",
     school: "Jnanasagara PU College, Channarayapatna",
     date: "June 2018 - Apr 2020",
-    grade: "83.3%", 
+    grade: "83.3%",
     desc: "I completed my class 12 high school education at Jnanasagara PU College, Channarayapatna, where I studied Science.",
     degree: "Karnataka State Board(XII)",
   },

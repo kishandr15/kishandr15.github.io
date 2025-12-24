@@ -2,7 +2,7 @@ import { Link as LinkR } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.div`
-    background-color: ${({theme}) => theme.card_light + 'dd'};
+    background-color: ${({ theme }) => theme.card_light + 'dd'};
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     height: 80px;
@@ -13,8 +13,8 @@ export const Nav = styled.div`
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid ${({theme}) => theme.primary + 20};
-    box-shadow: ${({theme}) => theme.shadow_sm};
+    border-bottom: 1px solid ${({ theme }) => theme.primary + 20};
+    box-shadow: ${({ theme }) => theme.shadow_sm};
     transition: all 0.3s ease;
     @media (max-width: 960px) {
         transition: 0.8s all ease;
@@ -44,6 +44,7 @@ export const NavLogo = styled(LinkR)`
     text-decoration: none;
     @media (max-width: 640px) {
       padding: 0 0px;
+      width: auto;
   }
 `;
 export const Span = styled.div`
@@ -165,10 +166,8 @@ export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
     display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
+    position: relative;
+    margin-left: auto;
     font-size: 1.5rem;
     cursor: pointer;
     color: ${({ theme }) => theme.text_primary};
@@ -184,13 +183,14 @@ export const MobileMenu = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 16px;
     position: absolute;
     top: 80px;
     right: 0;
     width: 100%;
     padding: 12px 40px 24px 40px;
-    background: ${({ theme }) => theme.card_light+99};
+    background: ${({ theme }) => theme.card_light + 99};
     transition: all 0.6s ease-in-out;
     transform: ${({ isOpen }) => (isOpen ? 'translateY(0)' : 'translateY(-100%)')};
     border-radius: 0 0 20px 20px;
@@ -247,7 +247,7 @@ export const MobileMenuButton = styled.a`
   }
 `;
 
-export  const MobileLink = styled.a`
+export const MobileLink = styled.a`
   color: ${({ theme }) => theme.text_primary};
   font-weight: 500;
   cursor: pointer;
