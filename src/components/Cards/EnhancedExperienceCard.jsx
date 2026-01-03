@@ -44,10 +44,25 @@ const Card = styled(motion.div)`
     transform: scaleY(1);
   }
   
+  &:active {
+    transform: translateY(-2px) scale(0.99);
+    transition: transform 0.1s ease;
+  }
+  
   @media (max-width: 768px) {
     padding: 16px;
     gap: 12px;
     width: 100%;
+    
+    &:active {
+      transform: translateY(-4px) scale(0.98);
+      box-shadow: ${({ theme }) => theme.shadow_lg};
+      border-color: ${({ theme }) => theme.primary};
+    }
+    
+    &:active::before {
+      transform: scaleY(1);
+    }
   }
 
   @media (max-width: 480px) {
@@ -148,6 +163,13 @@ const ExpandButton = styled(motion.button)`
   transition: all 0.2s ease;
   flex-shrink: 0;
   
+  &:active {
+    transform: scale(0.95);
+    background: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.white};
+    transition: transform 0.1s ease;
+  }
+  
   &:hover {
     background: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.white};
@@ -203,6 +225,7 @@ const ExpandedContent = styled(motion.div)`
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid ${({ theme }) => theme.card_border};
+  overflow: hidden;
 `;
 
 const ImpactSection = styled.div`
@@ -296,12 +319,8 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
             $expanded={isExpanded}
             onClick={handleClick}
             layout
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{
-                opacity: { duration: 0.4, delay: index * 0.1 },
-                y: { duration: 0.4, delay: index * 0.1 },
-                layout: { duration: 0.3, ease: 'easeInOut' },
+                layout: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
             }}
         >
             <Top>
@@ -349,7 +368,10 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ 
+                            duration: 0.3,
+                            ease: [0.4, 0, 0.2, 1]
+                        }}
                     >
                         <ImpactSection>
                             <SectionTitle>

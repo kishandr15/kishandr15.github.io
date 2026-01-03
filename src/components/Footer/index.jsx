@@ -5,6 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WhatsApp from '@mui/icons-material/WhatsApp';
 import { Bio } from '../../data/constants';
+import { RetroGrid } from './RetroGrid';
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -13,6 +14,8 @@ const FooterContainer = styled.div`
   justify-content: center;
   background: ${({ theme }) => theme.card};
   border-top: 1px solid ${({ theme }) => theme.card_border};
+  position: relative;
+  overflow: hidden;
 `;
 
 const FooterWrapper = styled.footer`
@@ -24,6 +27,8 @@ const FooterWrapper = styled.footer`
   align-items: center;
   padding: 1rem;
   color: ${({ theme }) => theme.text_primary};
+  position: relative;
+  z-index: 1;
 `;
 
 const Logo = styled(motion.h1)`
@@ -142,6 +147,7 @@ const Copyright = styled.p`
 const Footer = () => {
   return (
     <FooterContainer>
+      <RetroGrid angle={65} />
       <FooterWrapper>
         <Logo
           initial={{ opacity: 0, y: 20 }}
@@ -221,7 +227,7 @@ const Footer = () => {
         </SocialMediaIcons>
 
         <Copyright>
-          &copy; 2025 Kishan D R. All rights reserved.
+          &copy; 2026 Kishan D R. All rights reserved.
         </Copyright>
       </FooterWrapper>
     </FooterContainer>

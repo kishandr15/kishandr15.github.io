@@ -11,7 +11,7 @@ const Cursor = styled.div`
   z-index: 9998;
   transition: transform 0.1s ease;
   transform: translate(-50%, -50%);
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  display: ${({ $visible }) => ($visible ? 'block' : 'none')};
   
   @media (max-width: 768px) {
     display: none;
@@ -28,7 +28,7 @@ const CursorFollower = styled.div`
   z-index: 9997;
   transition: transform 0.2s ease;
   transform: translate(-50%, -50%);
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  display: ${({ $visible }) => ($visible ? 'block' : 'none')};
   
   @media (max-width: 768px) {
     display: none;
@@ -77,14 +77,14 @@ const InteractiveCursor = () => {
   return (
     <>
       <Cursor
-        visible={visible}
+        $visible={visible}
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
         }}
       />
       <CursorFollower
-        visible={visible}
+        $visible={visible}
         style={{
           left: `${followerPos.x}px`,
           top: `${followerPos.y}px`,

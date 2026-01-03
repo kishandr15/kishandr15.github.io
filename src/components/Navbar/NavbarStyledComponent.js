@@ -30,6 +30,10 @@ export const NavbarContainer = styled.div`
   padding: 0 24px;
   max-width: 1200px;
   
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+  
   @media (max-width: 480px) {
     padding: 0 16px;
   }
@@ -42,22 +46,61 @@ export const NavLogo = styled(LinkR)`
     justify-content: start;
     align-items: center;
     text-decoration: none;
+    gap: 8px;
+    
+    @media (max-width: 768px) {
+      width: auto;
+      padding: 0;
+      align-items: center;
+    }
+    
     @media (max-width: 640px) {
       padding: 0 0px;
       width: auto;
   }
 `;
+
+export const LogoIcon = styled.img`
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(2);
+    transform-origin: center;
+    
+    @media (max-width: 640px) {
+      width: 40px;
+      height: 40px;
+      transform: scale(2);
+    }
+`;
+
 export const Span = styled.div`
     padding: 0 4px;
     font-weight: bold;
     font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    color: ${({ theme }) => theme.text_primary};
+    background: ${({ theme }) => theme.gradient_primary};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @media (max-width: 768px) {
+      font-size: 18px;
+      line-height: 1;
+    }
 `;
 export const NavItems = styled.ul`
     width: 100%;
     display: flex;
     align-items: center;
     justify-content:center;
-    gap: 32px;
+    gap: 8px;
     padding: 0 6px;
     list-style: none;
 
@@ -73,33 +116,80 @@ export const NavLink = styled.a`
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     position: relative;
-    padding: 8px 0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: ${({ theme }) => theme.primary_alpha};
+        border-radius: 8px;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+    }
     
     &::after {
         content: '';
         position: absolute;
-        bottom: 0;
-        left: 0;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
         width: 0;
         height: 2px;
         background: ${({ theme }) => theme.primary};
-        transition: width 0.3s ease;
+        border-radius: 2px;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    :hover {
+    &:hover {
       color: ${({ theme }) => theme.primary};
+      transform: translateY(-2px);
     }
     
-    :hover::after {
-        width: 100%;
+    &:hover::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    &:hover::after {
+        width: calc(100% - 32px);
+    }
+    
+    &:active {
+      transform: translateY(0) scale(0.98);
+      transition: transform 0.1s ease;
+    }
+    
+    @media (max-width: 768px) {
+      &:active {
+        color: ${({ theme }) => theme.primary};
+        transform: scale(0.97);
+      }
+      
+      &:active::before {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     &.active {
       color: ${({ theme }) => theme.primary};
     }
     
+    &.active::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
     &.active::after {
-        width: 100%;
+        width: calc(100% - 32px);
     }
 `;
 
@@ -120,6 +210,7 @@ export const GitHubButton = styled.a`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  background: transparent;
   
   &::before {
     content: '';
@@ -128,19 +219,24 @@ export const GitHubButton = styled.a`
     left: -100%;
     width: 100%;
     height: 100%;
-    background: ${({ theme }) => theme.primary};
-    transition: left 0.3s ease;
+    background: ${({ theme }) => theme.gradient_primary};
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
   }
   
-  :hover {
+  &:hover {
     color: ${({ theme }) => theme.white};
-    transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadow_md};
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: ${({ theme }) => theme.shadow_glow};
+    border-color: transparent;
   }
   
-  :hover::before {
+  &:hover::before {
     left: 0;
+  }
+  
+  &:active {
+    transform: translateY(-1px) scale(0.98);
   }
   
   @media screen and (max-width: 768px) { 
@@ -165,7 +261,7 @@ export const ButtonContainer = styled.div`
 export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
-    display: block;
+    display: flex;
     position: relative;
     margin-left: auto;
     font-size: 1.5rem;
@@ -173,7 +269,6 @@ export const MobileIcon = styled.div`
     color: ${({ theme }) => theme.text_primary};
     min-width: 44px;
     min-height: 44px;
-    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -239,11 +334,36 @@ export const MobileMenuButton = styled.a`
   font-weight: 500;
   text-decoration: none;
   font-size: 16px;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: ${({ theme }) => theme.gradient_primary};
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
 
   :hover {
     background: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.white};
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadow_md};
+  }
+  
+  :hover::before {
+    left: 0;
+  }
+  
+  :active {
+    transform: translateY(0);
   }
 `;
 
@@ -251,20 +371,70 @@ export const MobileLink = styled.a`
   color: ${({ theme }) => theme.text_primary};
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
-  padding: 12px 0;
+  padding: 12px 20px;
   min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
   
-  :hover {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${({ theme }) => theme.primary_alpha};
+    border-radius: 8px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: ${({ theme }) => theme.primary};
+    border-radius: 0 3px 3px 0;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  &:hover {
     color: ${({ theme }) => theme.primary};
+    transform: translateX(4px);
+  }
+  
+  &:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  &:hover::after {
+    height: 60%;
   }
 
   &.active {
-    border-bottom: 2px solid ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+  }
+  
+  &.active::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  &.active::after {
+    height: 60%;
   }
 `;
 

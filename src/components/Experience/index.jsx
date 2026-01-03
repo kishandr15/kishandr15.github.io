@@ -139,6 +139,12 @@ const Experience = () => {
                                 padding: 0,
                                 display: 'none',
                             },
+                            '@media (max-width: 660px)': {
+                                paddingLeft: '16px',
+                                '& .MuiTimelineSeparator-root': {
+                                    marginRight: '16px',
+                                },
+                            },
                         }}
                     >
                         {experiences.map((experience, index) => (
@@ -152,6 +158,8 @@ const Experience = () => {
                                     sx={{
                                         '@media (max-width: 660px)': {
                                             order: 2,
+                                            marginRight: '16px',
+                                            paddingRight: '0px',
                                         }
                                     }}
                                 >

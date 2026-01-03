@@ -1,6 +1,5 @@
 import React from 'react'
 import { Nav, NavLink, NavbarContainer, Span, NavLogo, NavItems, GitHubButton, ButtonContainer, MobileIcon, MobileMenu, MobileLink } from './NavbarStyledComponent'
-import { DiCssdeck } from 'react-icons/di';
 import { FaBars } from 'react-icons/fa';
 import { Bio } from '../../data/constants';
 import { useTheme } from 'styled-components';
@@ -12,18 +11,20 @@ const Navbar = () => {
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo to='/' style={{ display: "flex", alignItems: "center", color: "white", marginBottom: '20;', cursor: 'pointer' }}>
-          <DiCssdeck size="3rem" /> <Span>Portfolio</Span>
+        <NavLogo to='/' style={{ display: "flex", alignItems: "center", cursor: 'pointer' }}>
+          <Span>Portfolio</Span>
         </NavLogo>
 
         {/* Mobile Theme Switcher */}
-        <div style={{ display: 'none', alignItems: 'center', marginRight: '16px' }} className="mobile-theme">
+        <div style={{ display: 'none', alignItems: 'center' }} className="mobile-theme">
           <ThemeSwitcher />
         </div>
         <style>{`
           @media (max-width: 768px) {
             .mobile-theme {
               display: flex !important;
+              align-items: center !important;
+              margin-left: 16px !important;
             }
           }
         `}</style>

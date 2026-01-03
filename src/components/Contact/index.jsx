@@ -65,125 +65,161 @@ const Desc = styled(motion.div)`
   }
 `;
 
-const ContactForm = styled(motion.form)`
+const StyledWrapper = styled.div`
   width: 95%;
   max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.card};
-  padding: 36px;
-  border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.card_border};
-  box-shadow: ${({ theme }) => theme.shadow_md};
   margin-top: 28px;
-  gap: 16px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    box-shadow: ${({ theme }) => theme.shadow_lg};
-  }
   
   @media (max-width: 768px) {
-    padding: 24px;
     width: calc(100% - 32px);
     margin: 20px 16px 0;
   }
   
   @media (max-width: 480px) {
-    padding: 20px;
     width: calc(100% - 24px);
     margin: 16px 12px 0;
-    gap: 14px;
   }
-`;
 
-const ContactTitle = styled.div`
-  font-size: 24px;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
-`;
+  .form-container {
+    width: 100%;
+    background: linear-gradient(${({ theme }) => theme.card}, ${({ theme }) => theme.card}) padding-box,
+                linear-gradient(145deg, transparent 35%, ${({ theme }) => theme.primary_light}, ${({ theme }) => theme.primary}) border-box;
+    border: 2px solid transparent;
+    padding: 32px 24px;
+    font-size: 14px;
+    font-family: inherit;
+    color: ${({ theme }) => theme.text_primary};
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background-size: 200% 100%;
+    animation: gradient 5s ease infinite;
+  }
 
-const ContactInput = styled.input`
-  flex: 1;
-  background-color: ${({ theme }) => theme.card_light};
-  border: 1px solid ${({ theme }) => theme.card_border};
-  outline: none;
-  font-size: 16px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 10px;
-  padding: 14px 18px;
-  transition: all 0.3s ease;
-  min-height: 44px;
-  
-  &::placeholder {
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .form-container button:active {
+    scale: 0.95;
+  }
+
+  .form-container .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .form-container .form-group label {
+    display: block;
+    margin-bottom: 5px;
     color: ${({ theme }) => theme.text_secondary};
+    font-weight: 600;
+    font-size: 12px;
   }
-  
-  &:focus {
-    border: 2px solid ${({ theme }) => theme.primary};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.primary_alpha};
-    background-color: ${({ theme }) => theme.card};
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 16px;
+
+  .form-container .form-group input {
+    width: 100%;
     padding: 12px 16px;
+    border-radius: 8px;
+    color: ${({ theme }) => theme.text_primary};
+    font-family: inherit;
+    background-color: transparent;
+    border: 1px solid ${({ theme }) => theme.card_border};
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
     min-height: 44px;
   }
-`;
 
-const ContactInputMessage = styled.textarea`
-  flex: 1;
-  background-color: ${({ theme }) => theme.card_light};
-  border: 1px solid ${({ theme }) => theme.card_border};
-  outline: none;
-  font-size: 16px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 10px;
-  padding: 14px 18px;
-  resize: vertical;
-  min-height: 120px;
-  font-family: inherit;
-  transition: all 0.3s ease;
-  
-  &::placeholder {
+  .form-container .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    resize: none;
+    color: ${({ theme }) => theme.text_primary};
+    height: 96px;
+    border: 1px solid ${({ theme }) => theme.card_border};
+    background-color: transparent;
+    font-family: inherit;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .form-container .form-group input::placeholder {
+    opacity: 0.5;
     color: ${({ theme }) => theme.text_secondary};
   }
-  
-  &:focus {
-    border: 2px solid ${({ theme }) => theme.primary};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.primary_alpha};
-    background-color: ${({ theme }) => theme.card};
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 16px;
-    padding: 12px 16px;
-    min-height: 100px;
-  }
-`;
 
-const ContactButton = styled(motion.input)`
-  width: 100%;
-  text-decoration: none;
-  text-align: center;
-  background: ${({ theme }) => theme.gradient_primary};
-  padding: 16px 24px;
-  margin-top: 8px;
-  border-radius: 12px;
-  border: none;
-  color: ${({ theme }) => theme.white};
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: ${({ theme }) => theme.shadow_md};
-  min-height: 44px;
+  .form-container .form-group textarea::placeholder {
+    opacity: 0.5;
+    color: ${({ theme }) => theme.text_secondary};
+  }
+
+  .form-container .form-group input:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.primary_light};
+  }
+
+  .form-container .form-group textarea:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.primary_light};
+  }
+
+  .form-container .form-submit-btn {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-start;
+    font-family: inherit;
+    color: ${({ theme }) => theme.text_secondary};
+    font-weight: 600;
+    width: 40%;
+    background: ${({ theme }) => theme.card_light};
+    border: 1px solid ${({ theme }) => theme.card_border};
+    padding: 12px 16px;
+    font-size: inherit;
+    gap: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    min-height: 44px;
+  }
+
+  .form-container .form-submit-btn:hover {
+    background-color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }) => theme.text_primary};
+    color: ${({ theme }) => theme.card};
+  }
   
   @media (max-width: 480px) {
-    font-size: 16px;
-    padding: 14px 20px;
-    min-height: 44px;
+    .form-container {
+      padding: 24px 20px;
+    }
+    
+    .form-container .form-submit-btn {
+      width: 50%;
+    }
   }
 `;
 
@@ -222,27 +258,36 @@ const Contact = () => {
           Feel free to reach out to me for any questions or opportunities!
         </Desc>
 
-        <ContactForm
-          ref={form}
-          onSubmit={handleSubmit}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="email_id" required />
-          <ContactInput placeholder="Your Name" name="from_name" required />
-          <ContactInput placeholder="Subject" name="subject" required />
-          <ContactInputMessage placeholder="Message" rows="4" name="message" required />
-          <ContactButton
-            type="submit"
-            value="Send"
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-          />
-        </ContactForm>
+          <StyledWrapper>
+            <div className="form-container">
+              <form ref={form} onSubmit={handleSubmit} className="form">
+                <div className="form-group">
+                  <label htmlFor="email">Your Email</label>
+                  <input required name="email_id" id="email" type="email" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="name">Your Name</label>
+                  <input required name="from_name" id="name" type="text" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="subject">Subject</label>
+                  <input required name="subject" id="subject" type="text" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea required name="message" id="message" rows={10} cols={50} />
+                </div>
+                <button type="submit" className="form-submit-btn">Submit</button>
+              </form>
+            </div>
+          </StyledWrapper>
+        </motion.div>
 
         <Snackbar
           open={open}

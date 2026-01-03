@@ -133,11 +133,7 @@ const Description = styled.div`
 
 const EnhancedEducationCard = ({ education, index = 0 }) => {
   return (
-    <Card
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1, ease: 'easeOut' }}
-    >
+    <Card>
       <Top>
         <Image
           src={education.img}

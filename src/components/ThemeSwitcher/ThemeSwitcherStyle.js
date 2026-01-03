@@ -43,6 +43,7 @@ export const ToggleSlider = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: ${({ theme }) => theme.shadow_sm};
+  z-index: 2;
   
   svg {
     width: 14px;
@@ -70,6 +71,8 @@ export const IconWrapper = styled.div`
   width: 24px;
   height: 24px;
   transition: opacity 0.3s ease;
+  z-index: 1;
+  opacity: ${({ $active }) => ($active ? 0 : 1)};
   
   svg {
     width: 16px;

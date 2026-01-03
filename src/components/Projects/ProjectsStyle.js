@@ -81,8 +81,8 @@ export const ToggleButton = styled.div`
     font-weight: 500;
     white-space: nowrap;
     position: relative;
-    ${({ active, theme }) =>
-        active ? `
+    ${({ $active, theme }) =>
+        $active ? `
     background: ${theme.gradient_primary};
     color: ${theme.white};
     box-shadow: ${theme.shadow_md};
@@ -94,11 +94,11 @@ export const ToggleButton = styled.div`
     }
     
     &:hover {
-        ${({ active, theme }) => !active && `
+        ${({ $active, theme }) => !$active && `
             background: ${theme.primary + 15};
             color: ${theme.primary};
         `}
-        transform: ${({ active }) => active ? 'scale(1.02)' : 'scale(1.05)'};
+        transform: ${({ $active }) => $active ? 'scale(1.02)' : 'scale(1.05)'};
     }
     
     &:active {

@@ -123,9 +123,20 @@ const SkillItem = styled(motion.div)`
     box-shadow: ${({ theme }) => theme.shadow_sm};
   }
   
+  &:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
   @media (max-width: 768px) {
     font-size: 13px;
     padding: 6px 10px;
+    
+    &:active {
+      transform: scale(0.93);
+      border-color: ${({ theme }) => theme.primary};
+      background: ${({ theme }) => theme.primary + 20};
+    }
   }
 `;
 
@@ -260,11 +271,7 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
             $expanded={isExpanded}
             onClick={handleClick}
             layout
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{
-                opacity: { delay: index * 0.1, duration: 0.4 },
-                y: { delay: index * 0.1, duration: 0.4 },
                 layout: { duration: 0.3, ease: 'easeInOut' }
             }}
         >

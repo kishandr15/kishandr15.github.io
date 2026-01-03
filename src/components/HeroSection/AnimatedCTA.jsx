@@ -70,6 +70,12 @@ const SecondaryButton = styled(Button)`
     background: ${({ theme }) => theme.primary_alpha};
     border-color: ${({ theme }) => theme.primary_light};
   }
+  
+  &:active {
+    background: ${({ theme }) => theme.primary_alpha};
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
 `;
 
 const AnimatedCTA = ({ resumeLink = '#', contactLink = '#contact' }) => {

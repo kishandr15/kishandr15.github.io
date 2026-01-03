@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const SkipLink = styled.a`
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
   background: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.white};
@@ -12,10 +12,13 @@ const SkipLink = styled.a`
   z-index: 10000;
   font-weight: 600;
   border-radius: 0 0 8px 0;
-  transition: top 0.3s ease;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.3s ease;
+  border: none;
+  outline: none;
   
   &:focus {
-    top: 0;
+    clip-path: inset(0 0 0 0);
     outline: 2px solid ${({ theme }) => theme.white};
     outline-offset: 2px;
   }

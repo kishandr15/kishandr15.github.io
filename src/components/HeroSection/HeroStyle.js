@@ -92,6 +92,7 @@ export const HeroRightContainer = styled.div`
   order: 2;
   justify-content: end;
   gap: 12px;
+  position: relative;
   @media (max-width: 960px) {
     order: 1;
     justify-content: center;
@@ -103,6 +104,108 @@ export const HeroRightContainer = styled.div`
     margin-bottom: 30px;
   }
 `;
+
+export const GradientLinesWrapper = styled.div`
+  position: absolute;
+  bottom: -85px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 70px;
+    bottom: -80px;
+  }
+  
+  @media (max-width: 640px) {
+    width: 280px;
+    height: 60px;
+    bottom: -60px;
+  }
+`;
+
+export const GradientLines = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+`;
+
+export const GradientLine = styled.div`
+  position: absolute;
+  top: 0;
+  
+  &:nth-of-type(1) {
+    left: 5rem;
+    right: 5rem;
+    width: 75%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary_light}, transparent);
+    filter: blur(4px);
+  }
+  
+  &:nth-of-type(2) {
+    left: 5rem;
+    right: 5rem;
+    width: 75%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary_light}, transparent);
+  }
+  
+  &:nth-of-type(3) {
+    left: 15rem;
+    right: 15rem;
+    width: 25%;
+    height: 5px;
+    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary}, transparent);
+    filter: blur(4px);
+  }
+  
+  &:nth-of-type(4) {
+    left: 15rem;
+    right: 15rem;
+    width: 25%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary}, transparent);
+  }
+  
+  @media (max-width: 960px) {
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      left: 3rem;
+      right: 3rem;
+    }
+    
+    &:nth-of-type(3),
+    &:nth-of-type(4) {
+      left: 10rem;
+      right: 10rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      left: 2rem;
+      right: 2rem;
+    }
+    
+    &:nth-of-type(3),
+    &:nth-of-type(4) {
+      left: 8rem;
+      right: 8rem;
+    }
+  }
+`;
+
 
 export const Img = styled.img`
   position: relative;
@@ -273,6 +376,19 @@ export const SocialMediaIcon = styled.a`
     border: 2px solid ${({ theme }) => theme.primary + 20};
     min-width: 44px;
     min-height: 44px;
+    outline: none;
+    
+    &:focus {
+        outline: none;
+        background: ${({ theme }) => theme.card};
+        color: ${({ theme }) => theme.text_primary};
+        border-color: ${({ theme }) => theme.primary + 20};
+    }
+    
+    &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.primary};
+        outline-offset: 2px;
+    }
     
     &:hover {
         transform: translateY(-4px) scale(1.1);

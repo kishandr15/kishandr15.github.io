@@ -42,10 +42,25 @@ const Card = styled.div`
     transform: scaleX(1);
   }
   
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
   @media (max-width: 768px) {
     max-width: 100%;
     height: auto;
-    grid-template-rows: 200px auto 64px;
+    grid-template-rows: 200px auto auto;
+    
+    &:active {
+      transform: scale(0.97);
+      box-shadow: ${({ theme }) => theme.shadow_lg};
+      border-color: ${({ theme }) => theme.primary};
+    }
+    
+    &:active::before {
+      transform: scaleX(1);
+    }
   }
 `;
 
@@ -65,6 +80,13 @@ const Image = styled.img`
   
   ${Card}:hover & {
     transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    ${Card}:active & {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
   }
 `;
 
@@ -90,6 +112,15 @@ const Content = styled.div`
   grid-template-rows: 72px 67px 124px;
   gap: 16px;
   overflow: hidden;
+  flex: 1;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    grid-template-rows: none;
+  }
 `;
 
 const Header = styled.div`
@@ -97,6 +128,11 @@ const Header = styled.div`
   flex-direction: column;
   gap: 8px;
   min-height: 72px;
+  
+  @media (max-width: 768px) {
+    min-height: auto;
+    gap: 6px;
+  }
 `;
 
 const Title = styled.h3`
@@ -132,7 +168,8 @@ const Description = styled.p`
   
   @media (max-width: 768px) {
     font-size: 13px;
-    min-height: 62px;
+    min-height: auto;
+    -webkit-line-clamp: 2;
   }
 `;
 
@@ -144,6 +181,11 @@ const Tags = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    gap: 4px;
+    margin-top: 4px;
+  }
 `;
 
 const Tag = styled.span`
@@ -170,6 +212,13 @@ const Footer = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    padding: 12px 20px;
+    gap: 8px;
+    margin-top: auto;
+  }
 `;
 
 const LinkButton = styled.a`
@@ -198,6 +247,11 @@ const LinkButton = styled.a`
       transform: translateY(-2px);
       box-shadow: ${({ theme }) => theme.shadow_md};
     }
+    
+    &:active {
+      transform: translateY(0) scale(0.98);
+      transition: transform 0.1s ease;
+    }
   }
   
   &.secondary {
@@ -207,6 +261,12 @@ const LinkButton = styled.a`
     
     &:hover {
       background: ${({ theme }) => theme.primary_alpha};
+    }
+    
+    &:active {
+      background: ${({ theme }) => theme.primary_alpha};
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
     }
   }
 `;

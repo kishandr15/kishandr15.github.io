@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import HeroBgAnimation from '../HeroBgAnimation'
 import FloatingShapes from './FloatingShapes'
 import AnimatedCTA from './AnimatedCTA'
-import { HeroContainer, HeroBg, HeroLeftContainer, Img, HeroRightContainer, HeroInnerContainer, TextLoop, Title, Span, SubTitle, SocialMediaIcons, SocialMediaIcon } from './HeroStyle'
+import { HeroContainer, HeroBg, HeroLeftContainer, Img, HeroRightContainer, HeroInnerContainer, TextLoop, Title, Span, SubTitle, SocialMediaIcons, SocialMediaIcon, GradientLinesWrapper, GradientLines, GradientLine } from './HeroStyle'
 import HeroImg from '../../images/HeroImage.jpeg'
 import Typewriter from 'typewriter-effect';
 import { Bio } from '../../data/constants';
@@ -104,6 +104,7 @@ const HeroSection = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label={label}
+                                        tabIndex={0}
                                         as={motion.a}
                                         initial={{ opacity: 0, scale: 0 }}
                                         animate={{ opacity: 1, scale: 1 }}
@@ -153,9 +154,17 @@ const HeroSection = () => {
                                     src={HeroImg}
                                     alt="Kishan D R - Frontend Developer & Software Engineer Portfolio"
                                     loading="eager"
-                                    fetchPriority="high"
+                                    fetchpriority="high"
                                 />
                             </motion.div>
+                            <GradientLinesWrapper>
+                                <GradientLines>
+                                    <GradientLine />
+                                    <GradientLine />
+                                    <GradientLine />
+                                    <GradientLine />
+                                </GradientLines>
+                            </GradientLinesWrapper>
                         </motion.div>
                     </HeroRightContainer>
                 </HeroInnerContainer>
