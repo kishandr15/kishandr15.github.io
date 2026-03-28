@@ -5,7 +5,7 @@ import { darkTheme, lightTheme } from './utils/Themes.js'
 import { ThemeProvider, useTheme } from './contexts/ThemeContext.js';
 import Navbar from "./components/Navbar";
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import SEO from "./components/SEO";
@@ -63,14 +63,6 @@ const ScrollToHash = () => {
     let cancelled = false;
     let lastTop = -1;
     let stableCount = 0;
-
-    const scrollToEl = () => {
-      const el = document.getElementById(hash);
-      if (!el || cancelled) return false;
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top - 80, behavior: 'smooth' });
-      return top;
-    };
 
     // Keep scrolling until the element's position stabilises (no more layout shifts)
     const settle = (attempts = 0) => {

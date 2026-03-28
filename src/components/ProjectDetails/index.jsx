@@ -1,7 +1,6 @@
 import CloseRounded from '@mui/icons-material/CloseRounded';
 import GitHub from '@mui/icons-material/GitHub';
 import LinkedIn from '@mui/icons-material/LinkedIn';
-import { FiExternalLink } from 'react-icons/fi';
 import Modal from '@mui/material/Modal';
 import React from 'react'
 import styled from 'styled-components'
@@ -136,44 +135,6 @@ const MemberName = styled.div`
     color: ${({ theme }) => theme.text_primary};
     @media only screen and (max-width: 600px) {
         font-size: 14px;
-    }
-`;
-
-const ButtonGroup = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin: 16px 0px;
-    gap: 10px;
-`;
-
-const Button = styled.a`
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.white};
-    padding: 10px 16px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.primary};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    ${({ dull, theme }) => dull && `
-        background-color: ${theme.bgLight};
-        color: ${theme.text_secondary};
-        &:hover {
-            background-color: ${theme.card_hover};
-        }
-    `}
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity 0.15s ease;
-    &:hover {
-        opacity: 0.9;
-    }
-    @media only screen and (max-width: 600px) {
-        font-size: 12px;
     }
 `;
 

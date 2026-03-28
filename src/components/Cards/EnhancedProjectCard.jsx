@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Card = styled.div`
   width: 100%;
@@ -135,60 +134,6 @@ const Tag = styled.span`
   border-radius: 4px;
   white-space: nowrap;
   flex-shrink: 0;
-`;
-
-const Footer = styled.div`
-  padding: 12px 20px;
-  border-top: 1px solid ${({ theme }) => theme.card_border};
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    padding: 10px 16px;
-    gap: 8px;
-    margin-top: auto;
-  }
-`;
-
-const LinkButton = styled.a`
-  flex: 1;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-
-  svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  &.primary {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
-
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-
-  &.secondary {
-    background: transparent;
-    color: ${({ theme }) => theme.text_secondary};
-    border: 1px solid ${({ theme }) => theme.card_border};
-
-    &:hover {
-      border-color: ${({ theme }) => theme.text_tertiary};
-      color: ${({ theme }) => theme.text_primary};
-    }
-  }
 `;
 
 const EnhancedProjectCard = ({ project, setOpenModal }) => {
