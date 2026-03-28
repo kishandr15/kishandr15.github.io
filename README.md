@@ -6,43 +6,41 @@ A modern, interactive portfolio website showcasing frontend development skills, 
 
 ## 🚀 Features
 
-### Frontend Showcase
-- **Interactive Skills Demonstration**: Live code examples and technology showcases
-- **Modern UI Components**: Built with React, TypeScript, and Styled Components
+### Core
+- **Modern UI Components**: Built with React and Styled Components
 - **Responsive Design**: Fully optimized for all devices
+- **Blog**: MDX-powered blog with custom components
 
 ### Unique Features
 - **Particle Background**: Interactive particle effects using TSParticles
 - **Scroll Progress Indicator**: Visual progress bar at the top
-- **Interactive Cursor**: Custom cursor effects (desktop only)
-- **Stats Section**: Showcasing achievements and metrics
 - **Smooth Animations**: Framer Motion animations throughout
 
 ### SEO & Performance
 - **SEO Optimized**: Comprehensive meta tags, Open Graph, and structured data
 - **Accessibility**: WCAG compliant with skip links and keyboard navigation
 - **Performance**: Optimized images, lazy loading, and code splitting
-- **Analytics Ready**: Google Analytics integration support
+- **Analytics Ready**: Google Analytics and Mixpanel integration support
 
 ### Sections
 1. **Hero Section**: Introduction with animated background
-2. **Stats**: Key metrics and achievements
-3. **Skills**: Technical skills with interactive cards
-4. **Experience**: Work experience timeline
-5. **Frontend Showcase**: Interactive code demonstrations
-6. **Projects**: Portfolio projects with filters
-7. **Education**: Academic background
-8. **Contact**: Contact form with EmailJS integration
+2. **Skills**: Technical skills with interactive cards
+3. **Experience**: Work experience timeline
+4. **Projects**: Portfolio projects with filters
+5. **Education**: Academic background
+6. **Blog**: Technical blog posts with MDX
+7. **Contact**: Contact form with EmailJS integration
 
 ## 🛠️ Technologies Used
 
 - **React 18**: UI library
 - **Framer Motion**: Animations
 - **Styled Components**: CSS-in-JS styling
-- **TypeScript**: Type safety
+- **MDX**: Blog content authoring
 - **TSParticles**: Particle effects
 - **React Helmet**: SEO management
 - **EmailJS**: Contact form handling
+- **Mixpanel**: Event analytics
 
 ## 📦 Installation
 

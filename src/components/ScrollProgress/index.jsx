@@ -7,18 +7,16 @@ const ProgressBar = styled(motion.div)`
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: ${({ theme }) => theme.gradient_primary};
+  height: 2px;
+  background: ${({ theme }) => theme.primary};
   z-index: 9999;
   transform-origin: left;
   will-change: transform;
-  box-shadow: 0 0 10px ${({ theme }) => theme.primary};
 `;
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
 
-  // Apply spring physics for smooth animation
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,

@@ -4,45 +4,27 @@ import styled from 'styled-components';
 
 const Card = styled(motion.div)`
   width: 650px;
-  border-radius: 16px;
-  box-shadow: ${({ theme }) => theme.shadow_md};
+  border-radius: 12px;
   padding: 20px 24px;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   background: ${({ theme }) => theme.card};
   border: 1px solid ${({ theme }) => theme.card_border};
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: ${({ theme }) => theme.gradient_primary};
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  
+  transition: all 0.2s ease;
+
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow_lg};
-    transform: translateY(-4px);
-    border-color: ${({ theme }) => theme.primary};
-    
-    &::before {
-      transform: scaleX(1);
-    }
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.text_tertiary};
+    box-shadow: ${({ theme }) => theme.shadow_md};
   }
-  
+
   @media only screen and (max-width: 768px) {
     padding: 16px 20px;
-    gap: 12px;
+    gap: 10px;
     width: 300px;
   }
 `;
@@ -54,17 +36,17 @@ const Top = styled.div`
 `;
 
 const Image = styled.img`
-  height: 56px;
-  width: 56px;
-  border-radius: 12px;
-  margin-top: 4px;
+  height: 48px;
+  width: 48px;
+  border-radius: 10px;
+  margin-top: 2px;
   object-fit: cover;
   background: ${({ theme }) => theme.card_light};
   border: 1px solid ${({ theme }) => theme.card_border};
-  
+
   @media only screen and (max-width: 768px) {
-    height: 48px;
-    width: 48px;
+    height: 40px;
+    width: 40px;
   }
 `;
 
@@ -72,62 +54,63 @@ const Body = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 `;
 
 const Name = styled.div`
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
-  
+
   @media only screen and (max-width: 768px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
 const Degree = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: ${({ theme }) => theme.text_secondary};
-  
+
   @media only screen and (max-width: 768px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
 const Date = styled.div`
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   color: ${({ theme }) => theme.text_tertiary};
-  
+  margin-top: 2px;
+
   @media only screen and (max-width: 768px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
 const Grade = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: ${({ theme }) => theme.text_secondary};
-  
+
   b {
     color: ${({ theme }) => theme.text_primary};
   }
-  
+
   @media only screen and (max-width: 768px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
 const Description = styled.div`
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: ${({ theme }) => theme.text_secondary};
   line-height: 1.6;
-  
+
   @media only screen and (max-width: 768px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 

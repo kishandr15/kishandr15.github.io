@@ -5,17 +5,18 @@ import { darkTheme, lightTheme } from './utils/Themes.js'
 import { ThemeProvider, useTheme } from './contexts/ThemeContext.js';
 import Navbar from "./components/Navbar";
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
-import InteractiveCursor from "./components/InteractiveCursor";
 import SEO from "./components/SEO";
 import SkipToMain from "./components/SkipLink";
 import styled from "styled-components";
 import React, { Suspense, useEffect } from "react";
 import { trackPageView } from './utils/analytics';
+import ErrorBoundary from './components/ErrorBoundary';
+import BlogPreview from './components/Blog/BlogPreview';
+const BackToTop = React.lazy(() => import('./components/BackToTop'));
 
-const ParticlesBackground = React.lazy(() => import('./components/ParticlesBackground'));
 const ProjectDetails = React.lazy(() => import('./components/ProjectDetails'));
 const Experience = React.lazy(() => import('./components/Experience'));
 const Education = React.lazy(() => import('./components/Education'));
@@ -23,8 +24,8 @@ const Skills = React.lazy(() => import('./components/Skills'));
 const Projects = React.lazy(() => import('./components/Projects'));
 const Contact = React.lazy(() => import('./components/Contact'));
 const Footer = React.lazy(() => import('./components/Footer'));
+const BlogPost = React.lazy(() => import('./components/Blog/BlogPost'));
 
-// Skeleton loader to prevent layout shifts
 const SkeletonLoader = styled.div`
   min-height: ${({ height }) => height || '400px'};
   width: 100%;
@@ -40,46 +41,69 @@ const Body = styled.div`
   overflow-x: hidden;
   position: relative;
   z-index: 1;
-  
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(133, 76, 230, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(133, 76, 230, 0.06) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  > * {
-    position: relative;
-    z-index: 1;
-  }
+  padding-top: 0;
 `
 
 const Wrapper = styled.div`
-  background: linear-gradient(135deg, rgba(133, 76, 230, 0.1) 0%, rgba(133, 76, 230, 0.05) 50%, rgba(133, 76, 230, 0.1) 100%);
   width: 100%;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 98%, 0 100%);
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(133, 76, 230, 0.05) 0%, transparent 70%);
-    pointer-events: none;
-  }
 `
 
-// Inner component that uses the theme context
+// Handles scroll on navigation — scroll to top or to #hash
+const ScrollToHash = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash?.replace('#', '');
+    if (!hash) {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+
+    let cancelled = false;
+    let lastTop = -1;
+    let stableCount = 0;
+
+    const scrollToEl = () => {
+      const el = document.getElementById(hash);
+      if (!el || cancelled) return false;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 80, behavior: 'smooth' });
+      return top;
+    };
+
+    // Keep scrolling until the element's position stabilises (no more layout shifts)
+    const settle = (attempts = 0) => {
+      if (cancelled || attempts > 40) return;
+      const el = document.getElementById(hash);
+      if (!el) {
+        setTimeout(() => settle(attempts + 1), 100);
+        return;
+      }
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      if (Math.abs(top - lastTop) < 2) {
+        stableCount++;
+        if (stableCount >= 3) {
+          // Position stable — do final scroll
+          window.scrollTo({ top: top - 80, behavior: 'smooth' });
+          return;
+        }
+      } else {
+        stableCount = 0;
+        window.scrollTo({ top: top - 80, behavior: 'auto' });
+      }
+      lastTop = top;
+      setTimeout(() => settle(attempts + 1), 150);
+    };
+
+    setTimeout(() => settle(), 50);
+
+    return () => { cancelled = true; };
+  }, [location]);
+
+  return null;
+};
+
 const AppContent = () => {
   const { resolvedTheme } = useTheme();
   const [openModal, setOpenModal] = useState({ state: false, project: null });
@@ -89,50 +113,82 @@ const AppContent = () => {
     trackPageView(window.location.pathname);
   }, []);
 
+
   return (
     <StyledThemeProvider theme={currentTheme}>
       <Router>
+        <ScrollToHash />
         <SEO />
         <SkipToMain />
-        <InteractiveCursor />
         <ScrollProgress />
-        {typeof window !== 'undefined' && window.innerWidth > 768 && (
-          <Suspense fallback={null}>
-            <ParticlesBackground />
-          </Suspense>
-        )}
         <Navbar />
 
-        <Body>
-          <HeroSection />
+        <Routes>
+          <Route path="/blog/:slug" element={
+            <Body>
+              <Suspense fallback={<SkeletonLoader height="80vh" />}>
+                <BlogPost />
+              </Suspense>
+              <ErrorBoundary sectionName="Footer">
+                <Suspense fallback={null}>
+                  <Footer />
+                </Suspense>
+              </ErrorBoundary>
+            </Body>
+          } />
+          <Route path="*" element={
+            <Body>
+              <HeroSection />
 
-          <Wrapper>
-            <Suspense fallback={<SkeletonLoader height="600px" />}>
-              <Skills />
-              <Experience />
-            </Suspense>
-          </Wrapper>
+              <Wrapper>
+                <ErrorBoundary sectionName="Skills & Experience">
+                  <Suspense fallback={<SkeletonLoader height="600px" />}>
+                    <Skills />
+                    <Experience />
+                  </Suspense>
+                </ErrorBoundary>
+              </Wrapper>
 
-          <Suspense fallback={<SkeletonLoader height="800px" />}>
-            <Projects openModal={openModal} setOpenModal={setOpenModal} />
-          </Suspense>
+              <ErrorBoundary sectionName="Projects">
+                <Suspense fallback={<SkeletonLoader height="800px" />}>
+                  <Projects openModal={openModal} setOpenModal={setOpenModal} />
+                </Suspense>
+              </ErrorBoundary>
 
-          <Wrapper>
-            <Suspense fallback={<SkeletonLoader height="500px" />}>
-              <Education />
-              <Contact />
-            </Suspense>
-          </Wrapper>
+              <Wrapper>
+                <ErrorBoundary sectionName="Education & Contact">
+                  <Suspense fallback={<SkeletonLoader height="500px" />}>
+                    <Education />
+                  </Suspense>
+                </ErrorBoundary>
+              </Wrapper>
 
-          <Suspense fallback={null}>
-            <Footer />
-          </Suspense>
-          {openModal.state &&
-            <Suspense fallback={null}>
-              <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
-            </Suspense>
-          }
-        </Body>
+              <BlogPreview />
+
+              <Wrapper>
+                <ErrorBoundary sectionName="Contact">
+                  <Suspense fallback={<SkeletonLoader height="400px" />}>
+                    <Contact />
+                  </Suspense>
+                </ErrorBoundary>
+              </Wrapper>
+
+              <ErrorBoundary sectionName="Footer">
+                <Suspense fallback={null}>
+                  <Footer />
+                </Suspense>
+              </ErrorBoundary>
+              {openModal.state &&
+                <Suspense fallback={null}>
+                  <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
+                </Suspense>
+              }
+              <Suspense fallback={null}>
+                <BackToTop />
+              </Suspense>
+            </Body>
+          } />
+        </Routes>
 
       </Router>
     </StyledThemeProvider>

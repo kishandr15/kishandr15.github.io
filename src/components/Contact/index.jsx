@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
 import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const Container = styled.div`
   display: flex;
@@ -11,10 +12,6 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  
-  @media (max-width: 960px) {
-    padding: 0px;
-  }
 `;
 
 const Wrapper = styled.div`
@@ -24,57 +21,51 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1350px;
-  padding: 0px 0px 80px 0px;
+  max-width: 1100px;
+  padding: 80px 24px;
   gap: 12px;
-  
-  @media (max-width: 960px) {
-    flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 64px 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 48px 16px;
   }
 `;
 
 const Title = styled(motion.div)`
-  font-size: 42px;
+  font-size: 32px;
   text-align: center;
   font-weight: 700;
-  margin-top: 20px;
-  background: linear-gradient(
-    135deg, 
-    ${({ theme }) => theme.text_primary} 0%, 
-    ${({ theme }) => theme.primary_light} 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
+  color: ${({ theme }) => theme.text_primary};
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
+    font-size: 26px;
   }
 `;
 
 const Desc = styled(motion.div)`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   max-width: 600px;
   color: ${({ theme }) => theme.text_secondary};
-  
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
 const StyledWrapper = styled.div`
   width: 95%;
-  max-width: 600px;
+  max-width: 560px;
   margin-top: 28px;
-  
+
   @media (max-width: 768px) {
     width: calc(100% - 32px);
     margin: 20px 16px 0;
   }
-  
+
   @media (max-width: 480px) {
     width: calc(100% - 24px);
     margin: 16px 12px 0;
@@ -82,9 +73,8 @@ const StyledWrapper = styled.div`
 
   .form-container {
     width: 100%;
-    background: linear-gradient(${({ theme }) => theme.card}, ${({ theme }) => theme.card}) padding-box,
-                linear-gradient(145deg, transparent 35%, ${({ theme }) => theme.primary_light}, ${({ theme }) => theme.primary}) border-box;
-    border: 2px solid transparent;
+    background: ${({ theme }) => theme.card};
+    border: 1px solid ${({ theme }) => theme.card_border};
     padding: 32px 24px;
     font-size: 14px;
     font-family: inherit;
@@ -93,27 +83,7 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     box-sizing: border-box;
-    border-radius: 16px;
-    background-size: 200% 100%;
-    animation: gradient 5s ease infinite;
-  }
-
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .form-container button:active {
-    scale: 0.95;
+    border-radius: 12px;
   }
 
   .form-container .form {
@@ -132,27 +102,27 @@ const StyledWrapper = styled.div`
     display: block;
     margin-bottom: 5px;
     color: ${({ theme }) => theme.text_secondary};
-    font-weight: 600;
-    font-size: 12px;
+    font-weight: 500;
+    font-size: 13px;
   }
 
   .form-container .form-group input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 8px;
     color: ${({ theme }) => theme.text_primary};
     font-family: inherit;
     background-color: transparent;
     border: 1px solid ${({ theme }) => theme.card_border};
     outline: none;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    transition: border-color 0.15s ease;
     min-height: 44px;
   }
 
   .form-container .form-group textarea {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 8px;
     resize: none;
     color: ${({ theme }) => theme.text_primary};
@@ -161,80 +131,82 @@ const StyledWrapper = styled.div`
     background-color: transparent;
     font-family: inherit;
     outline: none;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    transition: border-color 0.15s ease;
   }
 
-  .form-container .form-group input::placeholder {
-    opacity: 0.5;
-    color: ${({ theme }) => theme.text_secondary};
-  }
-
+  .form-container .form-group input::placeholder,
   .form-container .form-group textarea::placeholder {
     opacity: 0.5;
-    color: ${({ theme }) => theme.text_secondary};
+    color: ${({ theme }) => theme.text_tertiary};
   }
 
-  .form-container .form-group input:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.primary_light};
-  }
-
+  .form-container .form-group input:focus,
   .form-container .form-group textarea:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.primary_light};
+    border-color: ${({ theme }) => theme.primary};
   }
 
   .form-container .form-submit-btn {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    align-self: flex-start;
     font-family: inherit;
-    color: ${({ theme }) => theme.text_secondary};
-    font-weight: 600;
-    width: 40%;
-    background: ${({ theme }) => theme.card_light};
-    border: 1px solid ${({ theme }) => theme.card_border};
-    padding: 12px 16px;
-    font-size: inherit;
-    gap: 8px;
-    margin-top: 8px;
+    color: ${({ theme }) => theme.white};
+    font-weight: 500;
+    width: auto;
+    align-self: flex-start;
+    background: ${({ theme }) => theme.primary};
+    border: none;
+    padding: 10px 24px;
+    font-size: 14px;
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: opacity 0.15s ease;
     min-height: 44px;
   }
 
-  .form-container .form-submit-btn:hover {
-    background-color: ${({ theme }) => theme.text_primary};
-    border-color: ${({ theme }) => theme.text_primary};
-    color: ${({ theme }) => theme.card};
+  .form-container .form-submit-btn:hover:not(:disabled) {
+    opacity: 0.9;
   }
-  
+
+  .form-container .form-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 480px) {
     .form-container {
       padding: 24px 20px;
-    }
-    
-    .form-container .form-submit-btn {
-      width: 50%;
     }
   }
 `;
 
 const Contact = () => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const form = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_gfgm3em', 'template_mp244im', form.current, 'Pm1NSiNNekWnVjghg')
-      .then((result) => {
+    setLoading(true);
+    setError(false);
+    emailjs.sendForm(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      form.current,
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+    )
+      .then(() => {
         setOpen(true);
         form.current.reset();
-      }, (error) => {
-        console.log(error.text);
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -242,27 +214,27 @@ const Contact = () => {
     <Container id="contact">
       <Wrapper>
         <Title
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           Contact
         </Title>
         <Desc
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
         >
-          Feel free to reach out to me for any questions or opportunities!
+          Feel free to reach out for any questions or opportunities
         </Desc>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
         >
           <StyledWrapper>
             <div className="form-container">
@@ -283,19 +255,24 @@ const Contact = () => {
                   <label htmlFor="message">Message</label>
                   <textarea required name="message" id="message" rows={10} cols={50} />
                 </div>
-                <button type="submit" className="form-submit-btn">Submit</button>
+                <button type="submit" className="form-submit-btn" disabled={loading}>
+                  {loading ? 'Sending\u2026' : 'Send Message'}
+                </button>
               </form>
             </div>
           </StyledWrapper>
         </motion.div>
 
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          onClose={() => setOpen(false)}
-          message="Email sent successfully!"
-          severity="success"
-        />
+        <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+          <MuiAlert onClose={() => setOpen(false)} severity="success" variant="filled">
+            Message sent successfully!
+          </MuiAlert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={6000} onClose={() => setError(false)}>
+          <MuiAlert onClose={() => setError(false)} severity="error" variant="filled">
+            Failed to send. Please try again or email directly.
+          </MuiAlert>
+        </Snackbar>
       </Wrapper>
     </Container>
   );

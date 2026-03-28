@@ -1,33 +1,23 @@
 import styled from "styled-components";
 
 export const HeroContainer = styled.div`
-  background: linear-gradient(135deg, ${({ theme }) => theme.bg} 0%, ${({ theme }) => theme.bgLight} 50%, ${({ theme }) => theme.bg} 100%);
+  background: ${({ theme }) => theme.bg};
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
-  padding: 100px 30px;
+  padding: 120px 32px 80px;
+  min-height: 100vh;
   overflow: hidden;
+
   @media (max-width: 960px) {
-    padding: 80px 16px;
+    padding: 80px 24px 64px;
+    min-height: auto;
   }
   @media (max-width: 640px) {
-    padding: 60px 16px;
+    padding: 64px 16px 48px;
   }
   z-index: 1;
-
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 98%, 0 100%);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(133, 76, 230, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(133, 76, 230, 0.08) 0%, transparent 50%);
-    pointer-events: none;
-  }
 `;
 
 export const HeroBg = styled.div`
@@ -40,18 +30,7 @@ export const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  max-width: 1360px;
   overflow: hidden;
-  padding: 0 30px;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-
-  @media (max-width: 960px) {
-    justify-content: center;
-    padding: 0 0px;
-  }
 `;
 
 export const HeroInnerContainer = styled.div`
@@ -66,18 +45,11 @@ export const HeroInnerContainer = styled.div`
     flex-direction: column;
   }
 `;
+
 export const HeroLeftContainer = styled.div`
   width: 100%;
   order: 1;
   @media (max-width: 960px) {
-    order: 2;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  @media (max-width: 640px) {
     order: 2;
     margin-bottom: 30px;
     display: flex;
@@ -97,7 +69,7 @@ export const HeroRightContainer = styled.div`
     order: 1;
     justify-content: center;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 48px;
   }
 
   @media (max-width: 640px) {
@@ -105,302 +77,131 @@ export const HeroRightContainer = styled.div`
   }
 `;
 
-export const GradientLinesWrapper = styled.div`
-  position: absolute;
-  bottom: -85px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 450px;
-  height: 80px;
-  pointer-events: none;
-  z-index: 0;
-  
-  @media (max-width: 768px) {
-    width: 350px;
-    height: 70px;
-    bottom: -80px;
-  }
-  
-  @media (max-width: 640px) {
-    width: 280px;
-    height: 60px;
-    bottom: -60px;
-  }
-`;
-
-export const GradientLines = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-`;
-
-export const GradientLine = styled.div`
-  position: absolute;
-  top: 0;
-  
-  &:nth-of-type(1) {
-    left: 5rem;
-    right: 5rem;
-    width: 75%;
-    height: 2px;
-    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary_light}, transparent);
-    filter: blur(4px);
-  }
-  
-  &:nth-of-type(2) {
-    left: 5rem;
-    right: 5rem;
-    width: 75%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary_light}, transparent);
-  }
-  
-  &:nth-of-type(3) {
-    left: 15rem;
-    right: 15rem;
-    width: 25%;
-    height: 5px;
-    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary}, transparent);
-    filter: blur(4px);
-  }
-  
-  &:nth-of-type(4) {
-    left: 15rem;
-    right: 15rem;
-    width: 25%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary}, transparent);
-  }
-  
-  @media (max-width: 960px) {
-    &:nth-of-type(1),
-    &:nth-of-type(2) {
-      left: 3rem;
-      right: 3rem;
-    }
-    
-    &:nth-of-type(3),
-    &:nth-of-type(4) {
-      left: 10rem;
-      right: 10rem;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    &:nth-of-type(1),
-    &:nth-of-type(2) {
-      left: 2rem;
-      right: 2rem;
-    }
-    
-    &:nth-of-type(3),
-    &:nth-of-type(4) {
-      left: 8rem;
-      right: 8rem;
-    }
-  }
-`;
-
-
 export const Img = styled.img`
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 450px;
-  max-height: 450px;
+  max-width: 360px;
+  max-height: 360px;
   border-radius: 50%;
-  border: 3px solid ${({ theme }) => theme.primary};
-  box-shadow: ${({ theme }) => theme.shadow_glow};
+  border: 3px solid ${({ theme }) => theme.card_border};
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 280px;
+    max-height: 280px;
   }
 
   @media (max-width: 640px) {
-    max-width: 280px;
-    max-height: 280px;
+    max-width: 220px;
+    max-height: 220px;
   }
 `;
 
 export const Title = styled.div`
-  font-weight: 800;
-  font-size: 56px;
-  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary} 0%, ${({ theme }) => theme.primary_light} 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
+  font-weight: 700;
+  font-size: 48px;
+  color: ${({ theme }) => theme.text_primary};
+  line-height: 1.15;
   margin-bottom: 16px;
+  letter-spacing: -0.03em;
+
   @media (max-width: 960px) {
     text-align: center;
-    font-size: 48px;
+    font-size: 40px;
   }
 
   @media (max-width: 640px) {
-    font-size: 36px;
-    line-height: 1.3;
+    font-size: 32px;
+    line-height: 1.2;
     margin-bottom: 12px;
   }
 `;
 
 export const TextLoop = styled.div`
-  font-weight: 600;
-  font-size: 32px;
+  font-weight: 500;
+  font-size: 22px;
   display: flex;
-  gap: 12px;
-  color: ${({ theme }) => theme.text_primary};
-  line-height: 68px;
+  gap: 10px;
+  color: ${({ theme }) => theme.text_secondary};
+  line-height: 1.5;
+
   @media (max-width: 960px) {
     text-align: center;
   }
   @media (max-width: 640px) {
-    font-size: 22px;
-    line-height: 48px;
+    font-size: 18px;
+    line-height: 1.5;
     margin-bottom: 16px;
   }
 `;
 
 export const Span = styled.span`
   color: ${({ theme }) => theme.primary};
-  cursor: pointer;
+  font-weight: 600;
 `;
 
 export const SubTitle = styled.div`
-  font-size: 20px;
-  line-height: 32px;
-  margin-bottom: 42px;
-  color: ${({ theme }) => theme.text_primary + 95};
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  color: ${({ theme }) => theme.text_secondary};
+  max-width: 520px;
 
   @media (max-width: 960px) {
     text-align: center;
   }
 
   @media (max-width: 640px) {
-    font-size: 16px;
-    line-height: 32px;
+    font-size: 15px;
+    line-height: 1.7;
   }
-`;
-
-export const ResumeButton = styled.a`
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    width: 95%;
-    max-width: 300px;
-    text-align: center;
-    padding: 16px 32px;
-    color:${({ theme }) => theme.white};
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: ${({ theme }) => theme.gradient_primary};
-    box-shadow: ${({ theme }) => theme.shadow_md};
-    position: relative;
-    overflow: hidden;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
-    
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: ${({ theme }) => theme.shadow_lg};
-    }
-    
-    &:hover::before {
-        left: 100%;
-    }
-    
-    &:active {
-        transform: translateY(0);
-    }
-    
-    @media (max-width: 640px) {
-        padding: 14px 24px;
-        font-size: 16px;
-        min-height: 44px;
-    }
-    
-    @media (max-width: 480px) {
-        padding: 12px 20px;
-        font-size: 15px;
-        width: 100%;
-        max-width: 100%;
-    } 
-
 `;
 
 export const SocialMediaIcons = styled.div`
     display: flex;
-    gap: 16px;
+    gap: 12px;
     margin-top: 24px;
-    justify-content: center;
+
     @media (max-width: 960px) {
         justify-content: center;
     }
 `;
 
 export const SocialMediaIcon = styled.a`
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${({ theme }) => theme.card};
-    color: ${({ theme }) => theme.text_primary};
-    font-size: 20px;
+    background: transparent;
+    color: ${({ theme }) => theme.text_tertiary};
+    font-size: 18px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid ${({ theme }) => theme.primary + 20};
+    transition: color 0.15s ease;
+    border: 1px solid ${({ theme }) => theme.card_border};
     min-width: 44px;
     min-height: 44px;
     outline: none;
-    
+
     &:focus {
         outline: none;
-        background: ${({ theme }) => theme.card};
-        color: ${({ theme }) => theme.text_primary};
-        border-color: ${({ theme }) => theme.primary + 20};
     }
-    
+
     &:focus-visible {
         outline: 2px solid ${({ theme }) => theme.primary};
         outline-offset: 2px;
     }
-    
+
     &:hover {
-        transform: translateY(-4px) scale(1.1);
-        background: ${({ theme }) => theme.primary};
-        color: ${({ theme }) => theme.white};
-        box-shadow: ${({ theme }) => theme.shadow_glow};
-        border-color: ${({ theme }) => theme.primary};
+        color: ${({ theme }) => theme.text_primary};
+        border-color: ${({ theme }) => theme.text_tertiary};
     }
-    
+
     @media (max-width: 640px) {
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
     }
 `;

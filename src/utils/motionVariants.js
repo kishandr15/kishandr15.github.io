@@ -3,37 +3,37 @@
 // ============================================
 
 export const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1], // Custom easing curve
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
 
 export const fadeInDown = {
-    hidden: { opacity: 0, y: -30 },
+    hidden: { opacity: 0, y: -20 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
 
 export const fadeInScale = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: {
         opacity: 1,
         scale: 1,
         transition: {
-            duration: 0.5,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
@@ -43,7 +43,7 @@ export const fadeIn = {
     visible: {
         opacity: 1,
         transition: {
-            duration: 0.5,
+            duration: 0.4,
         },
     },
 };
@@ -53,25 +53,25 @@ export const fadeIn = {
 // ============================================
 
 export const slideInFromLeft = {
-    hidden: { opacity: 0, x: -60 },
+    hidden: { opacity: 0, x: -40 },
     visible: {
         opacity: 1,
         x: 0,
         transition: {
-            duration: 0.7,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
 
 export const slideInFromRight = {
-    hidden: { opacity: 0, x: 60 },
+    hidden: { opacity: 0, x: 40 },
     visible: {
         opacity: 1,
         x: 0,
         transition: {
-            duration: 0.7,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
@@ -85,8 +85,8 @@ export const staggerContainer = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2,
+            staggerChildren: 0.08,
+            delayChildren: 0.15,
         },
     },
 };
@@ -96,7 +96,7 @@ export const staggerFast = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.05,
+            staggerChildren: 0.04,
             delayChildren: 0.1,
         },
     },
@@ -107,8 +107,8 @@ export const staggerSlow = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.3,
+            staggerChildren: 0.15,
+            delayChildren: 0.2,
         },
     },
 };
@@ -120,39 +120,36 @@ export const staggerSlow = {
 export const buttonHover = {
     rest: { scale: 1 },
     hover: {
-        scale: 1.05,
+        scale: 1.02,
         transition: {
-            duration: 0.2,
+            duration: 0.15,
             ease: 'easeOut',
         },
     },
     tap: {
-        scale: 0.95,
+        scale: 0.98,
     },
 };
 
 export const cardHover = {
     rest: {
         y: 0,
-        scale: 1,
     },
     hover: {
-        y: -8,
-        scale: 1.02,
+        y: -2,
         transition: {
-            duration: 0.3,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.2,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
 
 export const iconHover = {
-    rest: { scale: 1, rotate: 0 },
+    rest: { scale: 1 },
     hover: {
-        scale: 1.1,
-        rotate: 5,
+        scale: 1.05,
         transition: {
-            duration: 0.2,
+            duration: 0.15,
             ease: 'easeOut',
         },
     },
@@ -173,13 +170,13 @@ export const parallaxVariants = (offset) => ({
 });
 
 export const scaleOnScroll = {
-    hidden: { scale: 0.8, opacity: 0 },
+    hidden: { scale: 0.95, opacity: 0 },
     visible: {
         scale: 1,
         opacity: 1,
         transition: {
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.6,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
@@ -194,70 +191,19 @@ export const wordReveal = {
         y: 0,
         opacity: 1,
         transition: {
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.6,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
 
 export const letterReveal = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.5,
-        },
-    },
-};
-
-// ============================================
-// SPECIAL EFFECTS
-// ============================================
-
-export const magneticEffect = {
-    x: 0,
-    y: 0,
-    transition: {
-        type: 'spring',
-        stiffness: 150,
-        damping: 15,
-        mass: 0.1,
-    },
-};
-
-export const floatingAnimation = {
-    initial: { y: 0 },
-    animate: {
-        y: [-10, 10, -10],
-        transition: {
-            duration: 3,
-            repeat: Infinity,
-            ease: 'easeInOut',
-        },
-    },
-};
-
-export const pulseAnimation = {
-    initial: { scale: 1 },
-    animate: {
-        scale: [1, 1.05, 1],
-        transition: {
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-        },
-    },
-};
-
-export const rotateAnimation = {
-    initial: { rotate: 0 },
-    animate: {
-        rotate: 360,
-        transition: {
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
+            duration: 0.4,
         },
     },
 };
@@ -267,20 +213,20 @@ export const rotateAnimation = {
 // ============================================
 
 export const pageTransition = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 12 },
     animate: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.5,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
     exit: {
         opacity: 0,
-        y: -20,
+        y: -12,
         transition: {
-            duration: 0.3,
+            duration: 0.2,
         },
     },
 };
@@ -294,20 +240,20 @@ export const modalBackdrop = {
     visible: {
         opacity: 1,
         transition: {
-            duration: 0.3,
+            duration: 0.2,
         },
     },
 };
 
 export const modalContent = {
-    hidden: { opacity: 0, scale: 0.95, y: 20 },
+    hidden: { opacity: 0, scale: 0.97, y: 12 },
     visible: {
         opacity: 1,
         scale: 1,
         y: 0,
         transition: {
-            duration: 0.3,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.25,
+            ease: [0.25, 0.1, 0.25, 1],
         },
     },
 };
@@ -316,10 +262,7 @@ export const modalContent = {
 // UTILITY FUNCTIONS
 // ============================================
 
-/**
- * Creates a stagger container with custom timing
- */
-export const createStaggerContainer = (staggerDelay = 0.1, delayChildren = 0.2) => ({
+export const createStaggerContainer = (staggerDelay = 0.08, delayChildren = 0.15) => ({
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -330,10 +273,7 @@ export const createStaggerContainer = (staggerDelay = 0.1, delayChildren = 0.2) 
     },
 });
 
-/**
- * Creates a slide animation from any direction
- */
-export const createSlideVariant = (direction, distance = 60) => {
+export const createSlideVariant = (direction, distance = 40) => {
     const axis = direction === 'left' || direction === 'right' ? 'x' : 'y';
     const value = direction === 'left' || direction === 'up' ? -distance : distance;
 
@@ -343,16 +283,13 @@ export const createSlideVariant = (direction, distance = 60) => {
             opacity: 1,
             [axis]: 0,
             transition: {
-                duration: 0.7,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
             },
         },
     };
 };
 
-/**
- * Respects user's reduced motion preference
- */
 export const respectReducedMotion = (variants) => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return {

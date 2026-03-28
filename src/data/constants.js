@@ -35,12 +35,12 @@ export const skills = [
       {
         name: "CSS",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
       },
       {
         name: "JavaScript",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
       },
       {
         name: "TypeScript",
@@ -55,7 +55,7 @@ export const skills = [
       {
         name: "Tailwind CSS",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1024px-Tailwind_CSS_Logo.svg.png?20230715030042",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg",
       },
 
       {
@@ -97,6 +97,7 @@ export const skills = [
         name: "REST API",
         image:
           "https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/rest-api-icon.png",
+        darkInvert: true,
       },
     ],
   },
@@ -107,12 +108,13 @@ export const skills = [
       {
         name: "Git",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2048px-Git_icon.svg.png",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
       },
       {
         name: "GitHub",
         image:
           "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+        darkInvert: true,
       },
       {
         name: "Docker",
@@ -120,14 +122,20 @@ export const skills = [
           "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg",
       },
       {
+        name: "System Design",
+        image:
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/unifiedmodelinglanguage/unifiedmodelinglanguage-original.svg",
+      },
+      {
         name: "Vercel",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/2560px-Vercel_logo_black.svg.png",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/vercel/vercel-original.svg",
+        darkInvert: true,
       },
       {
         name: "VS Code",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/512px-Visual_Studio_Code_1.35_icon.svg.png?20210804221519",
+          "https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg",
       },
       {
         name: "Postman",
@@ -159,6 +167,17 @@ export const skills = [
         image:
           "https://w7.pngwing.com/pngs/421/864/png-transparent-web-accessibility-computer-icons-internet-user-interface-blue-search-engine-optimization-trademark.png",
       },
+      {
+        name: "AI Agents",
+        image:
+          "https://cdn.simpleicons.org/probot",
+      },
+      {
+        name: "Copilot Chatbot",
+        image:
+          "https://cdn.simpleicons.org/githubcopilot",
+        darkInvert: true,
+      },
 
     ],
   },
@@ -168,34 +187,31 @@ export const experiences = [
   {
     id: 0,
     img: "https://www.matters.ai/icon0.svg?1454d8ccc96992c9",
-    role: "Frontend Developer",
+    role: "SDE-I",
     company: "Matters.AI",
     date: "August 2025 - Present",
     desc: "Contributing to the UI/UX of enterprise-grade security dashboards and tools powering Matters.AI’s AI-native data protection platform - a context-aware system that proactively understands and protects sensitive data across cloud, SaaS, and endpoints. Matters.AI unifies DSPM, insider risk, exfiltration defense, and DLP into a single intelligent layer using semantic intelligence and predictive reasoning.",
     skills: [
-      // Core Frontend
       "React",
       "TypeScript",
       "JavaScript",
       "HTML5",
       "CSS3",
       "Tailwind CSS",
-
-      // Product-Specific / Relevant to Matters.AI
-      "Data Visualization",
       "Tanstack Query",
-      "Building Complex Dashboards",
-      "Component Architecture & Reusable UI Patterns",
-
-      // API & Integration
       "REST API Integration",
-
-      // Quality & Performance
+      "Webhooks",
+      "Server-Sent Events (SSE)",
+      "AI Agents",
+      "Copilot Chatbot",
+      "Data Visualization",
+      "PDF Service UI",
+      "Complex Dashboards",
+      "Component Architecture",
+      "System Design",
       "Performance Optimization",
       "Accessibility",
       "Testing",
-
-      // DevOps, Tools & Collaboration
       "Git & GitHub",
     ],
     impact: [
@@ -314,7 +330,7 @@ export const projects = [
   {
     id: 0,
     title: "WHEREABOUTS | Anti-Money Laundering Platform",
-    date: "June 2024 - Present",
+    date: "June 2024 - July 2025",
     description:
       "Architected comprehensive Anti-Money Laundering platform with KYC, Customer-360, and Name Screening modules for banking compliance. Built internal alert systems and branch-level CTR/STR reports for suspicious behavior tracking. Developed responsive Angular front-end and Spring Boot REST APIs, delivering 99% uptime production-grade services. Designed and optimized Oracle/MS SQL stored procedures, increasing data retrieval efficiency.",
     image: "/aml.png",
@@ -326,7 +342,7 @@ export const projects = [
   {
     id: 1,
     title: "DILIGENCE | Anomaly Detection Platform",
-    date: "June 2024 - Present",
+    date: "June 2024 - July 2025",
     description:
       "Implemented advanced anomaly detection platform using Isolation Forest model to detect anomalous transactions and mule accounts. Engineered interactive ML dashboards enabling behavioral analytics for risk assessment. Integrated machine learning for anomaly detection, reducing false positives by 15%. Contributed to IFRS 9 ECL calculation module including PD models, Z-scores, and transition matrices.",
     image: "/anomally.png",

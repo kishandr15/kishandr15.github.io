@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -13,87 +13,71 @@ const Shape = styled(motion.div)`
   position: absolute;
   border-radius: 50%;
   background: ${({ theme }) => theme.primary_alpha};
-  opacity: 0.5;
+  filter: blur(40px);
   will-change: transform;
 `;
 
-// Throttle function to limit updates
-const useThrottledValue = (value, delay = 100) => {
-    const [throttledValue, setThrottledValue] = useState(value);
-
-    useEffect(() => {
-        const timer = setTimeout(() => setThrottledValue(value), delay);
-        return () => clearTimeout(timer);
-    }, [value, delay]);
-
-    return throttledValue;
-};
+// Different depth values create true parallax layers
+const SHAPES = [
+  { size: 320, x: '8%',  y: '15%', depth: 1.0 },
+  { size: 220, x: '78%', y: '58%', depth: 0.5 },
+  { size: 260, x: '58%', y: '8%',  depth: 0.75 },
+  { size: 200, x: '18%', y: '65%', depth: 0.35 },
+];
 
 const FloatingShapes = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-    const throttledMouse = useThrottledValue(mousePosition, 50);
+  const refs = useRef([]);
 
-    useEffect(() => {
-        let rafId;
-        let lastX = 0;
-        let lastY = 0;
+  useEffect(() => {
+    let rafId;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
-        const handleMouseMove = (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+    const onMouseMove = (e) => {
+      targetX = (e.clientX / window.innerWidth - 0.5) * 40;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 40;
+    };
 
-            // Only update if moved significantly (reduces jank)
-            if (Math.abs(x - lastX) > 0.02 || Math.abs(y - lastY) > 0.02) {
-                lastX = x;
-                lastY = y;
+    const tick = () => {
+      // Smooth lerp — no React state involved
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
 
-                // Use RAF to batch updates
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = requestAnimationFrame(() => {
-                    setMousePosition({ x, y });
-                });
-            }
-        };
+      refs.current.forEach((el, i) => {
+        if (el) {
+          const d = SHAPES[i].depth;
+          el.style.transform = `translate3d(${currentX * d}px, ${currentY * d}px, 0)`;
+        }
+      });
 
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      rafId = requestAnimationFrame(tick);
+    };
 
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            if (rafId) cancelAnimationFrame(rafId);
-        };
-    }, []);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    rafId = requestAnimationFrame(tick);
 
-    // Memoize shapes config
-    const shapes = useMemo(() => [
-        { size: 300, x: '10%', y: '20%' },
-        { size: 200, x: '80%', y: '60%' },
-        { size: 250, x: '60%', y: '10%' },
-        { size: 180, x: '20%', y: '70%' },
-    ], []);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
-    return (
-        <FloatingContainer>
-            {shapes.map((shape, index) => (
-                <Shape
-                    key={index}
-                    style={{
-                        width: shape.size,
-                        height: shape.size,
-                        left: shape.x,
-                        top: shape.y,
-                        transform: `translate3d(${throttledMouse.x * 20}px, ${throttledMouse.y * 20}px, 0)`,
-                    }}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 0.5, scale: 1 }}
-                    transition={{
-                        duration: 1,
-                        delay: index * 0.2,
-                        ease: 'easeOut',
-                    }}
-                />
-            ))}
-        </FloatingContainer>
-    );
+  return (
+    <FloatingContainer>
+      {SHAPES.map((shape, i) => (
+        <Shape
+          key={i}
+          ref={(el) => (refs.current[i] = el)}
+          style={{ width: shape.size, height: shape.size, left: shape.x, top: shape.y }}
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 0.55, scale: 1 }}
+          transition={{ duration: 1.4, delay: i * 0.2, ease: 'easeOut' }}
+        />
+      ))}
+    </FloatingContainer>
+  );
 };
 
 export default React.memo(FloatingShapes);

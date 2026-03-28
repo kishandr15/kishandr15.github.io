@@ -1,50 +1,36 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import { FiChevronDown, FiChevronUp, FiCode } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 const Card = styled(motion.div)`
   width: 100%;
   max-width: 500px;
-  min-height: 280px;
+  min-height: 260px;
   background: ${({ theme }) => theme.card};
-  border: 1px solid ${({ theme, $expanded }) => $expanded ? theme.primary : theme.card_border};
-  box-shadow: ${({ theme, $expanded }) => $expanded ? theme.shadow_xl : theme.shadow_md};
-  border-radius: 16px;
+  border: 1px solid ${({ theme, $expanded }) => $expanded ? theme.text_tertiary : theme.card_border};
+  border-radius: 12px;
   padding: 24px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${({ theme }) => theme.gradient_primary};
-    transform: scaleX(${({ $expanded }) => $expanded ? 1 : 0});
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  
+
   &:hover {
-    transform: translateY(-4px);
-    border-color: ${({ theme }) => theme.primary};
-    box-shadow: ${({ theme }) => theme.shadow_lg};
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.text_tertiary};
+    box-shadow: ${({ theme }) => theme.shadow_md};
   }
-  
+
   @media (max-width: 768px) {
     max-width: 400px;
-    min-height: 260px;
+    min-height: 240px;
     padding: 20px;
   }
-  
+
   @media (max-width: 500px) {
     max-width: 330px;
-    min-height: 240px;
+    min-height: 220px;
     padding: 16px;
   }
 `;
@@ -57,96 +43,80 @@ const Header = styled.div`
 `;
 
 const SkillTitle = styled.h3`
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
-  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary} 0%, ${({ theme }) => theme.primary_light} 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   display: flex;
   align-items: center;
   gap: 8px;
-  
+
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 `;
 
 const ExpandButton = styled(motion.button)`
-  background: ${({ theme }) => theme.primary_alpha};
-  border: 1px solid ${({ theme }) => theme.primary};
-  border-radius: 8px;
-  padding: 8px;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.card_border};
+  border-radius: 6px;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: ${({ theme }) => theme.primary};
-  transition: all 0.2s ease;
-  
+  color: ${({ theme }) => theme.text_tertiary};
+  transition: all 0.15s ease;
+
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }) => theme.text_tertiary};
   }
-  
+
   svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 `;
 
 const SkillList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: ${({ $isExpanded }) => $isExpanded ? '16px' : '0'};
 `;
 
 const SkillItem = styled(motion.div)`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: ${({ theme }) => theme.text_primary};
-  border: 1px solid ${({ theme }) => theme.primary + 30};
-  background: ${({ theme }) => theme.primary + 10};
-  border-radius: 8px;
-  padding: 8px 12px;
+  border: 1px solid ${({ theme }) => theme.card_border};
+  background: ${({ theme }) => theme.bgLight};
+  border-radius: 6px;
+  padding: 6px 10px;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.2s ease;
-  
+  transition: border-color 0.15s ease;
+
   &:hover {
-    transform: translateY(-2px) scale(1.05);
-    border-color: ${({ theme }) => theme.primary};
-    background: ${({ theme }) => theme.primary + 20};
-    box-shadow: ${({ theme }) => theme.shadow_sm};
+    border-color: ${({ theme }) => theme.text_tertiary};
   }
-  
-  &:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-  }
-  
+
   @media (max-width: 768px) {
-    font-size: 13px;
-    padding: 6px 10px;
-    
-    &:active {
-      transform: scale(0.93);
-      border-color: ${({ theme }) => theme.primary};
-      background: ${({ theme }) => theme.primary + 20};
-    }
+    font-size: 12px;
+    padding: 5px 8px;
   }
 `;
 
 const SkillImage = styled.img`
-  width: 20px;
-  height: 20px;
-  
+  width: 18px;
+  height: 18px;
+  ${({ $darkInvert, theme }) =>
+    $darkInvert && theme.bg === '#0A0A0B' && `filter: invert(1) brightness(2);`}
+
   @media (max-width: 768px) {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
@@ -157,13 +127,13 @@ const ExpandedContent = styled(motion.div)`
 `;
 
 const Description = styled.p`
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   color: ${({ theme }) => theme.text_secondary};
   margin-bottom: 16px;
-  
+
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
@@ -176,23 +146,22 @@ const ProficiencyLabel = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 13px;
   color: ${({ theme }) => theme.text_secondary};
   font-weight: 500;
 `;
 
 const ProficiencyBar = styled.div`
-  height: 8px;
-  background: ${({ theme }) => theme.card_light};
-  border-radius: 4px;
+  height: 6px;
+  background: ${({ theme }) => theme.bgLight};
+  border-radius: 3px;
   overflow: hidden;
-  position: relative;
 `;
 
 const ProficiencyFill = styled(motion.div)`
   height: 100%;
-  background: ${({ theme }) => theme.gradient_primary};
-  border-radius: 4px;
+  background: ${({ theme }) => theme.primary};
+  border-radius: 3px;
 `;
 
 const UseCasesList = styled.ul`
@@ -202,27 +171,26 @@ const UseCasesList = styled.ul`
 `;
 
 const UseCase = styled(motion.li)`
-  font-size: 14px;
+  font-size: 13px;
   color: ${({ theme }) => theme.text_secondary};
-  padding: 8px 0;
-  padding-left: 24px;
+  padding: 6px 0;
+  padding-left: 20px;
   position: relative;
-  
+
   &::before {
-    content: '→';
+    content: '\u2192';
     position: absolute;
     left: 0;
     color: ${({ theme }) => theme.primary};
-    font-weight: bold;
+    font-weight: 500;
   }
-  
+
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 
 const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
-    // Enhanced skill data with descriptions and use cases
     const skillDetails = {
         'Frontend': {
             description: 'Building modern, responsive user interfaces with cutting-edge frameworks and libraries. Focus on performance, accessibility, and user experience.',
@@ -272,12 +240,11 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
             onClick={handleClick}
             layout
             transition={{
-                layout: { duration: 0.3, ease: 'easeInOut' }
+                layout: { duration: 0.25, ease: 'easeInOut' }
             }}
         >
             <Header $expanded={isExpanded}>
                 <SkillTitle>
-                    <FiCode />
                     {skill.title}
                 </SkillTitle>
                 <ExpandButton
@@ -285,8 +252,9 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
                         e.stopPropagation();
                         onToggle();
                     }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-expanded={isExpanded}
+                    aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${skill.title} skills`}
                 >
                     {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
                 </ExpandButton>
@@ -301,6 +269,7 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
                             src={item.image}
                             alt={`${item.name} icon`}
                             loading="lazy"
+                            $darkInvert={item.darkInvert}
                         />
                         {item.name}
                     </SkillItem>
@@ -314,7 +283,7 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.25 }}
                     >
                         <Description>{details.description}</Description>
 
@@ -327,23 +296,23 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
                                 <ProficiencyFill
                                     initial={{ width: 0 }}
                                     animate={{ width: `${details.proficiency}%` }}
-                                    transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+                                    transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
                                 />
                             </ProficiencyBar>
                         </ProficiencySection>
 
                         {details.useCases.length > 0 && (
                             <>
-                                <ProficiencyLabel style={{ marginBottom: '12px' }}>
+                                <ProficiencyLabel style={{ marginBottom: '10px' }}>
                                     Real-world Applications
                                 </ProficiencyLabel>
                                 <UseCasesList>
                                     {details.useCases.map((useCase, i) => (
                                         <UseCase
                                             key={i}
-                                            initial={{ opacity: 0, x: -20 }}
+                                            initial={{ opacity: 0, x: -10 }}
                                             animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.1 }}
+                                            transition={{ delay: i * 0.05 }}
                                         >
                                             {useCase}
                                         </UseCase>

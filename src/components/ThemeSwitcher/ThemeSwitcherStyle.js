@@ -2,63 +2,60 @@ import styled from 'styled-components';
 
 export const ToggleContainer = styled.button`
   position: relative;
-  width: 70px;
-  height: 32px;
-  background: ${({ theme, $isDark }) =>
-        $isDark ? theme.card : theme.bgLight};
-  border: 2px solid ${({ theme }) => theme.card_border};
+  width: 64px;
+  height: 30px;
+  background: ${({ theme }) => theme.bgLight};
+  border: 1px solid ${({ theme }) => theme.card_border};
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   padding: 0;
   overflow: hidden;
-  
+
   &:hover {
-    border-color: ${({ theme }) => theme.primary};
-    box-shadow: ${({ theme }) => theme.shadow_md};
+    border-color: ${({ theme }) => theme.text_tertiary};
   }
-  
+
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.primary};
     outline-offset: 2px;
   }
-  
+
   @media (max-width: 768px) {
-    width: 60px;
-    height: 28px;
+    width: 56px;
+    height: 26px;
   }
 `;
 
 export const ToggleSlider = styled.div`
   position: absolute;
-  width: 24px;
-  height: 24px;
-  background: ${({ theme }) => theme.gradient_primary};
+  width: 22px;
+  height: 22px;
+  background: ${({ theme }) => theme.primary};
   border-radius: 50%;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(${({ $isDark }) => $isDark ? '38px' : '4px'});
+  transition: transform 0.2s ease;
+  transform: translateX(${({ $isDark }) => $isDark ? '36px' : '4px'});
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: ${({ theme }) => theme.shadow_sm};
   z-index: 2;
-  
+
   svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     color: ${({ theme }) => theme.white};
   }
-  
+
   @media (max-width: 768px) {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     transform: translateX(${({ $isDark }) => $isDark ? '32px' : '4px'});
-    
+
     svg {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
     }
   }
 `;
@@ -68,34 +65,33 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  transition: opacity 0.3s ease;
+  width: 22px;
+  height: 22px;
+  transition: opacity 0.2s ease;
   z-index: 1;
-  opacity: ${({ $active }) => ($active ? 0 : 1)};
-  
+  opacity: ${({ $active }) => ($active ? 0 : 0.5)};
+
   svg {
-    width: 16px;
-    height: 16px;
-    color: ${({ theme, $active }) =>
-        $active ? theme.text_primary : theme.text_tertiary};
+    width: 14px;
+    height: 14px;
+    color: ${({ theme }) => theme.text_tertiary};
   }
-  
+
   &.sun {
-    left: 6px;
+    left: 5px;
   }
-  
+
   &.moon {
-    right: 6px;
+    right: 5px;
   }
-  
+
   @media (max-width: 768px) {
-    width: 20px;
-    height: 20px;
-    
+    width: 18px;
+    height: 18px;
+
     svg {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
     }
   }
 `;

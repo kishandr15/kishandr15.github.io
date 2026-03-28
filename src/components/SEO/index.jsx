@@ -4,7 +4,8 @@ import { Bio } from '../../data/constants'
 const SEO = ({ title, description, image, url }) => {
   const defaultTitle = `${Bio.name} - Frontend Developer & Software Engineer | Portfolio`
   const defaultDescription = "Kishan D R (kidhandr) - Frontend Developer at Matters.AI | Software Engineer based in Channarayapatna specializing in React, TypeScript, and Angular. Explore my portfolio for projects, skills, and experience."
-  const defaultImage = "https://kishandr.online/aml.png"
+  // Use your HeroImage or a dedicated OG image (1200x630px) placed in /public/og-image.jpg
+  const defaultImage = "https://kishandr.online/og-image.jpg"
   const defaultUrl = "https://kishandr.online/"
 
   const seo = {

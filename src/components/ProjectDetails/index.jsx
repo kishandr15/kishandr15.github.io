@@ -12,59 +12,58 @@ height: 100%;
 position: absolute;
 top: 0;
 left: 0;
-background-color: #000000a7;
+background-color: rgba(0, 0, 0, 0.6);
 display: flex;
 align-items: top;
 justify-content: center;
 overflow-y: scroll;
-transition: all 0.5s ease;
+transition: all 0.3s ease;
 `;
 
 const Wrapper = styled.div`
 max-width: 800px;
 width: 100%;
-border-radius: 16px;
+border-radius: 12px;
 margin: 50px 12px;
 height: min-content;
 background-color: ${({ theme }) => theme.card};
 color: ${({ theme }) => theme.text_primary};
-padding: 20px;
+padding: 24px;
 display: flex;
 flex-direction: column;
 position: relative;
+border: 1px solid ${({ theme }) => theme.card_border};
 `;
 
 const Title = styled.div`
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   color: ${({ theme }) => theme.text_primary};
   margin: 8px 6px 0px 6px;
+
   @media only screen and (max-width: 600px) {
-      font-size: 24px;
-      margin: 6px 6px 0px 6px;
+    font-size: 18px;
   }
 `;
 
 const Date = styled.div`
-    font-size: 16px;
-    margin: 2px 6px;
+    font-size: 14px;
+    margin: 4px 6px;
     font-weight: 400;
-    color: ${({ theme }) => theme.text_secondary};
+    color: ${({ theme }) => theme.text_tertiary};
     @media only screen and (max-width: 768px){
         font-size: 12px;
     }
 `
 
-
-
 const Desc = styled.div`
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
-    color: ${({ theme }) => theme.text_primary};
+    color: ${({ theme }) => theme.text_secondary};
     margin: 8px 6px;
+    line-height: 1.6;
     @media only screen and (max-width: 600px) {
         font-size: 14px;
-        margin: 6px 6px;
     }
 `;
 
@@ -72,23 +71,22 @@ const Image = styled.img`
     width: 100%;
     max-height: 400px;
     object-fit: cover;
-    border-radius: 12px;
-    margin-top: 30px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
-    
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid ${({ theme }) => theme.card_border};
+
     @media only screen and (max-width: 600px) {
         max-height: 300px;
     }
 `;
 
 const Label = styled.div`
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
     color: ${({ theme }) => theme.text_primary};
     margin: 8px 6px;
     @media only screen and (max-width: 600px) {
-        font-size: 16px;
-        margin: 8px 6px;
+        font-size: 15px;
     }
 `;
 
@@ -96,22 +94,17 @@ const Tags = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 8px 0px;
-    @media only screen and (max-width: 600px) {
-        margin: 4px 0px;
-    }
+    gap: 4px;
 `;
 
 const Tag = styled.div`
-    font-size: 14px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.primary};
+    font-size: 13px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.text_secondary};
     margin: 4px;
-    padding: 4px 8px;
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.primary + 20};
-    @media only screen and (max-width: 600px) {
-        font-size: 12px;
-    }
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: ${({ theme }) => theme.bgLight};
 `;
 
 const Members = styled.div`
@@ -120,9 +113,6 @@ const Members = styled.div`
     gap: 6px;
     flex-wrap: wrap;
     margin: 12px 6px;
-    @media only screen and (max-width: 600px) {
-        margin: 4px 6px;
-    }
 `;
 
 const Member = styled.div`
@@ -132,20 +122,15 @@ const Member = styled.div`
 `;
 
 const MemberImage = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 4px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
-    @media only screen and (max-width: 600px) {
-        width: 32px;
-        height: 32px;
-    }
+    border: 1px solid ${({ theme }) => theme.card_border};
 `;
 
 const MemberName = styled.div`
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     width: 200px;
     color: ${({ theme }) => theme.text_primary};
@@ -154,21 +139,20 @@ const MemberName = styled.div`
     }
 `;
 
-
 const ButtonGroup = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin: 12px 0px;
-    gap: 12px;
+    margin: 16px 0px;
+    gap: 10px;
 `;
 
 const Button = styled.a`
     width: 100%;
     text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text_primary};
-    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.white};
+    padding: 10px 16px;
     border-radius: 8px;
     background-color: ${({ theme }) => theme.primary};
     display: flex;
@@ -179,26 +163,24 @@ const Button = styled.a`
         background-color: ${theme.bgLight};
         color: ${theme.text_secondary};
         &:hover {
-            background-color: ${theme.bg + 99};
+            background-color: ${theme.card_hover};
         }
     `}
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.5s ease;
+    transition: opacity 0.15s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.primary + 99};
+        opacity: 0.9;
     }
     @media only screen and (max-width: 600px) {
         font-size: 12px;
     }
 `;
 
-
 const index = ({ openModal, setOpenModal }) => {
     const project = openModal?.project;
 
     const handleBackdropClick = (e) => {
-        // Only close if clicking directly on the backdrop, not its children
         if (e.target === e.currentTarget) {
             setOpenModal({ state: false, project: null });
         }
@@ -211,9 +193,11 @@ const index = ({ openModal, setOpenModal }) => {
                     <CloseRounded
                         style={{
                             position: "absolute",
-                            top: "10px",
-                            right: "20px",
+                            top: "12px",
+                            right: "16px",
                             cursor: "pointer",
+                            color: 'inherit',
+                            opacity: 0.5,
                         }}
                         onClick={() => setOpenModal({ state: false, project: null })}
                     />
@@ -254,6 +238,7 @@ const index = ({ openModal, setOpenModal }) => {
                             </Members>
                         </>
                     )}
+                    {/* Project links - hidden from UI
                     {(project?.github && project.github !== '#') || (project?.webapp && project.webapp !== '#') ? (
                         <ButtonGroup>
                             {project?.github && project.github !== '#' && (
@@ -264,15 +249,15 @@ const index = ({ openModal, setOpenModal }) => {
                             )}
                             {project?.webapp && project.webapp !== '#' && (
                                 <Button href={project.webapp} target='new'>
-                                    <FiExternalLink size={20} />
+                                    <FiExternalLink size={18} />
                                     View Live App
                                 </Button>
                             )}
                         </ButtonGroup>
                     ) : null}
+                    */}
                 </Wrapper>
             </Container>
-
         </Modal>
     )
 }

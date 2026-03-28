@@ -1,72 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Card = styled.div`
   width: 100%;
-  max-width: 380px;
-  height: 580px;
+  max-width: 360px;
+  height: 470px;
   background: ${({ theme }) => theme.card};
   cursor: pointer;
-  border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.primary + 20};
-  box-shadow: ${({ theme }) => theme.shadow_md};
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.card_border};
   overflow: hidden;
   padding: 0;
   display: grid;
-  grid-template-rows: 200px 1fr 64px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  grid-template-rows: 180px 1fr;
+  transition: all 0.2s ease;
   position: relative;
-  transform-origin: center bottom;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${({ theme }) => theme.gradient_primary};
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  
+
   &:hover {
-    transform: scale(1.02);
-    box-shadow: ${({ theme }) => theme.shadow_xl};
-    border-color: ${({ theme }) => theme.primary};
-    background: ${({ theme }) => theme.card_hover || theme.card_light};
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.text_tertiary};
+    box-shadow: ${({ theme }) => theme.shadow_lg};
   }
-  
-  &:hover::before {
-    transform: scaleX(1);
-  }
-  
-  &:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-  
+
   @media (max-width: 768px) {
     max-width: 100%;
     height: auto;
-    grid-template-rows: 200px auto auto;
-    
-    &:active {
-      transform: scale(0.97);
-      box-shadow: ${({ theme }) => theme.shadow_lg};
-      border-color: ${({ theme }) => theme.primary};
-    }
-    
-    &:active::before {
-      transform: scaleX(1);
-    }
+    grid-template-rows: 180px auto;
   }
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
-  height: 200px;
+  height: 180px;
   position: relative;
   overflow: hidden;
   background: ${({ theme }) => theme.bgLight};
@@ -76,17 +42,10 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
-  
+  transition: transform 0.3s ease;
+
   ${Card}:hover & {
-    transform: scale(1.1);
-  }
-  
-  @media (max-width: 768px) {
-    ${Card}:active & {
-      transform: scale(1.05);
-      transition: transform 0.2s ease;
-    }
+    transform: scale(1.03);
   }
 `;
 
@@ -94,66 +53,52 @@ const CategoryBadge = styled.div`
   position: absolute;
   top: 12px;
   right: 12px;
-  background: ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.white};
-  padding: 6px 12px;
-  border-radius: 20px;
+  background: ${({ theme }) => theme.bg}e6;
+  color: ${({ theme }) => theme.text_secondary};
+  padding: 4px 10px;
+  border-radius: 6px;
   font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(8px);
+  border: 1px solid ${({ theme }) => theme.card_border};
 `;
 
-
 const Content = styled.div`
-  padding: 24px;
-  display: grid;
-  grid-template-rows: 72px 67px 124px;
-  gap: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   overflow: hidden;
   flex: 1;
-  
+
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px;
-    grid-template-rows: none;
+    padding: 16px;
+    gap: 10px;
   }
 `;
 
 const Header = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-height: 72px;
-  
-  @media (max-width: 768px) {
-    min-height: auto;
-    gap: 6px;
-  }
+  gap: 4px;
 `;
 
 const Title = styled.h3`
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
 `;
 
 const Date = styled.div`
   font-size: 12px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary};
+  font-weight: 400;
+  color: ${({ theme }) => theme.text_tertiary};
 `;
 
 const Description = styled.p`
@@ -164,15 +109,12 @@ const Description = styled.p`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 67px;
-  
+
   @media (max-width: 768px) {
     font-size: 13px;
-    min-height: auto;
     -webkit-line-clamp: 2;
   }
 `;
-
 
 const Tags = styled.div`
   display: flex;
@@ -181,41 +123,30 @@ const Tags = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   overflow: hidden;
-  
-  @media (max-width: 768px) {
-    gap: 4px;
-    margin-top: 4px;
-  }
+  margin-top: auto;
 `;
 
 const Tag = styled.span`
   font-size: 11px;
   font-weight: 500;
-  color: ${({ theme }) => theme.primary};
-  background: ${({ theme }) => theme.primary + 15};
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.primary + 30};
-  transition: all 0.2s ease;
+  color: ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.bgLight};
+  padding: 3px 8px;
+  border-radius: 4px;
   white-space: nowrap;
   flex-shrink: 0;
-  
-  &:hover {
-    background: ${({ theme }) => theme.primary + 25};
-    transform: translateY(-1px);
-  }
 `;
 
 const Footer = styled.div`
-  padding: 16px 24px;
+  padding: 12px 20px;
   border-top: 1px solid ${({ theme }) => theme.card_border};
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   flex-shrink: 0;
-  
+
   @media (max-width: 768px) {
-    padding: 12px 20px;
+    padding: 10px 16px;
     gap: 8px;
     margin-top: auto;
   }
@@ -223,50 +154,39 @@ const Footer = styled.div`
 
 const LinkButton = styled.a`
   flex: 1;
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: all 0.2s ease;
-  
+  transition: all 0.15s ease;
+
   svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
-  
+
   &.primary {
-    background: ${({ theme }) => theme.gradient_primary};
+    background: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.white};
-    
+
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: ${({ theme }) => theme.shadow_md};
-    }
-    
-    &:active {
-      transform: translateY(0) scale(0.98);
-      transition: transform 0.1s ease;
+      opacity: 0.9;
     }
   }
-  
+
   &.secondary {
     background: transparent;
-    color: ${({ theme }) => theme.text_primary};
-    border: 1px solid ${({ theme }) => theme.primary};
-    
+    color: ${({ theme }) => theme.text_secondary};
+    border: 1px solid ${({ theme }) => theme.card_border};
+
     &:hover {
-      background: ${({ theme }) => theme.primary_alpha};
-    }
-    
-    &:active {
-      background: ${({ theme }) => theme.primary_alpha};
-      transform: scale(0.98);
-      transition: transform 0.1s ease;
+      border-color: ${({ theme }) => theme.text_tertiary};
+      color: ${({ theme }) => theme.text_primary};
     }
   }
 `;
@@ -283,7 +203,6 @@ const EnhancedProjectCard = ({ project, setOpenModal }) => {
           loading="lazy"
           decoding="async"
         />
-
         <CategoryBadge>
           {project.category === 'web app' ? 'Web App' : 'ML Project'}
         </CategoryBadge>
@@ -304,11 +223,47 @@ const EnhancedProjectCard = ({ project, setOpenModal }) => {
         </Tags>
       </Content>
 
-      <Footer>
-        <LinkButton className="primary" style={{ cursor: 'pointer', width: '100%' }}>
-          View Details
-        </LinkButton>
+      {/* Footer with project links - hidden from UI
+      <Footer onClick={(e) => e.stopPropagation()}>
+        {project.github && project.github !== '#' && (
+          <LinkButton
+            className="secondary"
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title} source code on GitHub`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FaGithub /> Code
+          </LinkButton>
+        )}
+        {project.webapp && project.webapp !== '#' && (
+          <LinkButton
+            className="primary"
+            href={project.webapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title} live demo`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FaExternalLinkAlt /> Live Demo
+          </LinkButton>
+        )}
+        {(!project.github || project.github === '#') && (!project.webapp || project.webapp === '#') && (
+          <LinkButton
+            className="primary"
+            as="button"
+            style={{ width: '100%', cursor: 'pointer' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenModal({ state: true, project });
+            }}
+          >
+            View Details
+          </LinkButton>
+        )}
       </Footer>
+      */}
     </Card>
   );
 };

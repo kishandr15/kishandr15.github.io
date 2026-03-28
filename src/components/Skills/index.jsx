@@ -12,14 +12,14 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  padding: 80px 0;
-  
+  padding: 80px 24px;
+
   @media (max-width: 768px) {
-    padding: 60px 0;
+    padding: 64px 16px;
   }
-  
+
   @media (max-width: 480px) {
-    padding: 40px 0;
+    padding: 48px 16px;
   }
 `
 
@@ -32,50 +32,28 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1100px;
   gap: 12px;
-  
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `
 
 const Title = styled.div`
-  font-size: 42px;
+  font-size: 32px;
   text-align: center;
   font-weight: 700;
-  margin-top: 20px;
   color: ${({ theme }) => theme.text_primary};
-  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary} 0%, ${({ theme }) => theme.primary_light} 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
+    font-size: 26px;
   }
 `;
 
 const Desc = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   max-width: 600px;
   color: ${({ theme }) => theme.text_secondary};
   margin-bottom: 8px;
-  
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
 
-const SubDesc = styled.div`
-  font-size: 15px;
-  text-align: center;
-  max-width: 700px;
-  color: ${({ theme }) => theme.text_tertiary};
-  font-style: italic;
-  
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 15px;
   }
 `;
 
@@ -83,22 +61,19 @@ const SkillsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
-  gap: 30px;
+  margin-top: 32px;
+  gap: 24px;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 20px;
-  
+
   @media (max-width: 768px) {
     gap: 20px;
-    padding: 0 16px;
-    margin-top: 30px;
+    margin-top: 24px;
   }
-  
+
   @media (max-width: 480px) {
     gap: 16px;
-    padding: 0 12px;
-    margin-top: 24px;
+    margin-top: 20px;
   }
 `
 
@@ -106,7 +81,6 @@ const Skills = () => {
   const [expandedCard, setExpandedCard] = React.useState(null);
 
   const handleCardClick = (index) => {
-    // Toggle: if clicking the same card, close it; otherwise open the new one
     setExpandedCard(expandedCard === index ? null : index);
   };
 
@@ -118,14 +92,12 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
+          style={{ textAlign: 'center' }}
         >
-          <Title>Frontend Capabilities</Title>
+          <Title>Skills</Title>
           <Desc>
-            Interactive showcase of technologies and real-world applications
+            Technologies and tools I work with
           </Desc>
-          <SubDesc>
-            Click on any card to explore proficiency levels and use cases
-          </SubDesc>
         </motion.div>
 
         <SkillsContainer

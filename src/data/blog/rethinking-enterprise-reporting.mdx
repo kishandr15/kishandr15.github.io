@@ -1,0 +1,77 @@
+import { Callout, BlogImage } from '../../components/Blog/MDXComponents';
+
+<BlogImage src="/blog/images/kishan-dr-matters-ai.webp" alt="Kishan DR - SDE-I, Matters.AI" />
+
+At Matters.AI, a **15-day internal engineering hackathon** was recently conducted - not to build flashy demos, but to strengthen the platform's **core reliability and scalability**.
+
+The motivation was simple: in enterprise environments, reliability isn't a feature. It's a baseline expectation.
+
+---
+
+## The Problem
+
+I worked on improving **PDF report generation** - a critical but inefficient workflow.
+
+- ~15 days to build each report
+- ~15 days more for iteration cycles
+- Tight coupling between frontend and backend
+- HTML + Jinja templates that didn't scale
+
+The result: cross-team bottlenecks, slow delivery, and high engineering overhead.
+
+---
+
+## The Approach
+
+Instead of patching the existing system, I **rethought the architecture from first principles**.
+
+**What I built:**
+
+- A **React-based standalone PDF service** - stateless, driven by structured JSON
+- Full **decoupling** of frontend and backend responsibilities
+- **Temporal** integration for scheduled and on-demand generation
+
+Backend owns data. Frontend owns rendering. Clean separation.
+
+---
+
+## The Hard Part
+
+> Generating an accurate table of contents with correct page numbers.
+
+Page numbers only exist **after** rendering - but the TOC needs them **before**.
+
+**Solution: two-pass rendering.**
+
+1. First pass - embed positional markers throughout the document
+2. Second pass - parse output, compute page indices, generate final PDF
+
+No manual indexing. Fully automated.
+
+---
+
+## Results
+
+| Metric | Before | After |
+|---|---|---|
+| Report dev time | ~30 days | 1-2 days |
+| Cross-team dependency | High | Eliminated |
+| Iteration speed | Blocked | Independent |
+| Scalability | Limited | Production-ready |
+
+---
+
+## Takeaways
+
+- The highest-leverage work is often in **foundational problems**, not new features
+- **Decoupled systems** improve both scalability and team velocity
+- Good architecture reduces technical complexity *and* organizational friction
+- Enterprise engineering is about **reliability under pressure**
+
+---
+
+This hackathon wasn't about shipping something new. It was about **fixing what matters** - and thinking more deeply about system design, developer experience, and long-term impact.
+
+<Callout>
+Read the official Matters.AI blog on this hackathon [here](https://www.matters.ai/events/enterprise-engineering-hackathon-matters-ai).
+</Callout>

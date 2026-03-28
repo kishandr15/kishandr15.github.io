@@ -1,12 +1,15 @@
 import mixpanel from 'mixpanel-browser';
 
-// Initialize Mixpanel
-mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN, {
-  autocapture: true,
-  record_sessions_percent: 0,
-  api_host: "https://api-js.mixpanel.com",
-  debug: process.env.NODE_ENV === 'development'
-});
+// Initialize Mixpanel only if token is provided
+const MIXPANEL_TOKEN = process.env.REACT_APP_MIXPANEL_TOKEN;
+if (MIXPANEL_TOKEN) {
+  mixpanel.init(MIXPANEL_TOKEN, {
+    autocapture: true,
+    record_sessions_percent: 0,
+    api_host: "https://api-js.mixpanel.com",
+    debug: process.env.NODE_ENV === 'development'
+  });
+}
 
 // Google Analytics helper functions
 const isGAvailable = () => {
@@ -15,11 +18,13 @@ const isGAvailable = () => {
 
 export const trackEvent = (eventName, props = {}) => {
   // Track with Mixpanel
-  mixpanel.track(eventName, {
-    ...props,
-    environment: process.env.NODE_ENV,
-    timestamp: new Date().toISOString(),
-  });
+  if (MIXPANEL_TOKEN) {
+    mixpanel.track(eventName, {
+      ...props,
+      environment: process.env.NODE_ENV,
+      timestamp: new Date().toISOString(),
+    });
+  }
 
   // Track with Google Analytics
   if (isGAvailable()) {
@@ -33,10 +38,12 @@ export const trackEvent = (eventName, props = {}) => {
 
 export const trackPageView = (path) => {
   // Track with Mixpanel
-  mixpanel.track('Page View', {
-    path,
-    title: document.title,
-  });
+  if (MIXPANEL_TOKEN) {
+    mixpanel.track('Page View', {
+      path,
+      title: document.title,
+    });
+  }
 
   // Track with Google Analytics
   if (isGAvailable()) {

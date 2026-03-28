@@ -80,23 +80,11 @@ const Projects = ({ openModal, setOpenModal }) => {
           transition={{ duration: 0.4 }}
         >
           <ToggleButtonGroup>
-            {toggle === 'all' ?
-              <ToggleButton $active value="all" onClick={() => setToggle('all')}>All</ToggleButton>
-              :
-              <ToggleButton value="all" onClick={() => setToggle('all')}>All</ToggleButton>
-            }
+            <ToggleButton $active={toggle === 'all'} onClick={() => setToggle('all')}>All</ToggleButton>
             <Divider />
-            {toggle === 'web app' ?
-              <ToggleButton $active value="web app" onClick={() => setToggle('web app')}>WEB APP'S</ToggleButton>
-              :
-              <ToggleButton value="web app" onClick={() => setToggle('web app')}>WEB APP'S</ToggleButton>
-            }
+            <ToggleButton $active={toggle === 'web app'} onClick={() => setToggle('web app')}>Web Apps</ToggleButton>
             <Divider />
-            {toggle === 'machine learning' ?
-              <ToggleButton $active value="machine learning" onClick={() => setToggle('machine learning')}>MACHINE LEARNING</ToggleButton>
-              :
-              <ToggleButton value="machine learning" onClick={() => setToggle('machine learning')}>MACHINE LEARNING</ToggleButton>
-            }
+            <ToggleButton $active={toggle === 'machine learning'} onClick={() => setToggle('machine learning')}>Machine Learning</ToggleButton>
           </ToggleButtonGroup>
         </motion.div>
 
@@ -117,7 +105,6 @@ const Projects = ({ openModal, setOpenModal }) => {
               >
                 <EnhancedProjectCard
                   project={project}
-                  openModal={openModal}
                   setOpenModal={setOpenModal}
                 />
               </motion.div>

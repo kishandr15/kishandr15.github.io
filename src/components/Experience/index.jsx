@@ -17,10 +17,14 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  padding: 40px 0px 80px 0px;
-  
-  @media (max-width: 960px) {
-    padding: 0px;
+  padding: 80px 24px;
+
+  @media (max-width: 768px) {
+    padding: 64px 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 48px 16px;
   }
 `;
 
@@ -31,54 +35,30 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1350px;
-  padding: 80px 0;
+  max-width: 1100px;
   gap: 12px;
-  
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `;
 
 const Title = styled.div`
-  font-size: 42px;
+  font-size: 32px;
   text-align: center;
   font-weight: 700;
-  margin-top: 20px;
   color: ${({ theme }) => theme.text_primary};
-  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary} 0%, ${({ theme }) => theme.primary_light} 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
+    font-size: 26px;
   }
 `;
 
 const Desc = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
-  max-width: 700px;
+  max-width: 600px;
   color: ${({ theme }) => theme.text_secondary};
   margin-bottom: 8px;
-  
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 16px;
-  }
-`;
 
-const SubDesc = styled.div`
-  font-size: 15px;
-  text-align: center;
-  max-width: 700px;
-  color: ${({ theme }) => theme.text_tertiary};
-  font-style: italic;
-  
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 15px;
   }
 `;
 
@@ -91,7 +71,7 @@ const TimelineSection = styled.div`
   align-items: center;
   justify-content: center;
   gap: 12px;
-  
+
   .MuiTimeline-root {
     width: 100%;
   }
@@ -99,8 +79,6 @@ const TimelineSection = styled.div`
   @media (max-width: 960px) {
     width: 100%;
   }
-
-
 `;
 
 const Experience = () => {
@@ -114,17 +92,16 @@ const Experience = () => {
         <Container id="experience">
             <Wrapper>
                 <motion.div
-                    initial={{ opacity: 0, y: -15 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.4 }}
+                    style={{ textAlign: 'center' }}
                 >
-                    <Title>Professional Journey</Title>
+                    <Title>Experience</Title>
                     <Desc>
-                        Building impactful products and solving complex engineering challenges
+                        My professional journey and key contributions
                     </Desc>
-                    <SubDesc>
-                        Click on any experience to see detailed impact metrics
-                    </SubDesc>
                 </motion.div>
 
                 <TimelineSection>
@@ -166,17 +143,19 @@ const Experience = () => {
                                     <TimelineDot
                                         variant="outlined"
                                         sx={{
-                                            borderColor: '#854CE6',
-                                            borderWidth: 2,
-                                            width: 16,
-                                            height: 16
+                                            borderColor: 'currentColor',
+                                            opacity: 0.3,
+                                            borderWidth: 1.5,
+                                            width: 12,
+                                            height: 12
                                         }}
                                     />
                                     {index !== experiences.length - 1 && (
                                         <TimelineConnector
                                             sx={{
-                                                background: 'linear-gradient(180deg, #854CE6 0%, rgba(133, 76, 230, 0.3) 100%)',
-                                                width: 2
+                                                background: 'currentColor',
+                                                opacity: 0.1,
+                                                width: 1
                                             }}
                                         />
                                     )}

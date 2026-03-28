@@ -17,10 +17,14 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  padding: 0px 0px 60px 0px;
-  
-  @media (max-width: 960px) {
-    padding: 0px;
+  padding: 80px 24px;
+
+  @media (max-width: 768px) {
+    padding: 64px 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 48px 16px;
   }
 `;
 
@@ -31,44 +35,29 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1350px;
-  padding: 40px 0px 0px 0px;
+  max-width: 1100px;
   gap: 12px;
-  
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `;
 
 const Title = styled(motion.div)`
-  font-size: 42px;
+  font-size: 32px;
   text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
-  background: linear-gradient(
-    135deg, 
-    ${({ theme }) => theme.text_primary} 0%, 
-    ${({ theme }) => theme.primary_light} 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_primary};
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
+    font-size: 26px;
   }
 `;
 
 const Desc = styled(motion.div)`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   max-width: 600px;
   color: ${({ theme }) => theme.text_secondary};
-  
+
   @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 16px;
+    font-size: 15px;
   }
 `;
 
@@ -81,23 +70,9 @@ const TimelineSection = styled.div`
   align-items: center;
   justify-content: center;
   gap: 12px;
-  
+
   @media (max-width: 660px) {
     align-items: end;
-  }
-`;
-
-const StyledTimelineDot = styled(TimelineDot)`
-  && {
-    background: ${({ theme }) => theme.primary};
-    border-color: ${({ theme }) => theme.primary};
-    box-shadow: 0 0 0 4px ${({ theme }) => theme.primary_alpha};
-  }
-`;
-
-const StyledTimelineConnector = styled(TimelineConnector)`
-  && {
-    background: ${({ theme }) => theme.primary};
   }
 `;
 
@@ -106,31 +81,48 @@ const Education = () => {
     <Container id="education">
       <Wrapper>
         <Title
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           Education
         </Title>
         <Desc
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
         >
-          My education has been a journey of self-discovery and growth. My educational details are as follows.
+          My academic background and qualifications
         </Desc>
         <TimelineSection>
           <Timeline>
-            {education.map((education, index) => (
+            {education.map((edu, index) => (
               <TimelineItem key={index}>
                 <TimelineContent sx={{ py: '12px', px: 2 }}>
-                  <EnhancedEducationCard education={education} index={index} />
+                  <EnhancedEducationCard education={edu} index={index} />
                 </TimelineContent>
                 <TimelineSeparator>
-                  <StyledTimelineDot variant="outlined" color="secondary" />
-                  {index !== education.length - 1 && <StyledTimelineConnector />}
+                  <TimelineDot
+                    variant="outlined"
+                    sx={{
+                      borderColor: 'currentColor',
+                      opacity: 0.3,
+                      borderWidth: 1.5,
+                      width: 12,
+                      height: 12
+                    }}
+                  />
+                  {index !== education.length - 1 && (
+                    <TimelineConnector
+                      sx={{
+                        background: 'currentColor',
+                        opacity: 0.1,
+                        width: 1
+                      }}
+                    />
+                  )}
                 </TimelineSeparator>
               </TimelineItem>
             ))}

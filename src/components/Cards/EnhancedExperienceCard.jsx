@@ -5,70 +5,36 @@ import { FiChevronDown, FiChevronUp, FiTrendingUp } from 'react-icons/fi';
 
 const Card = styled(motion.div)`
   width: 650px;
-  min-height: 200px;
-  border-radius: 16px;
-  box-shadow: ${({ theme }) => theme.shadow_md};
+  min-height: 180px;
+  border-radius: 12px;
   padding: 24px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 14px;
+  transition: all 0.2s ease;
   background: ${({ theme }) => theme.card};
-  border: 1px solid ${({ theme, $expanded }) => $expanded ? theme.primary : theme.primary + 20};
+  border: 1px solid ${({ theme, $expanded }) => $expanded ? theme.text_tertiary : theme.card_border};
   margin: 0;
   cursor: pointer;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: ${({ theme }) => theme.gradient_primary};
-    transform: scaleY(${({ $expanded }) => $expanded ? 1 : 0});
-    transform-origin: top;
-    transition: transform 0.4s ease;
-  }
-  
+
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow_lg};
-    transform: translateY(-8px);
-    border-color: ${({ theme }) => theme.primary};
-    background: ${({ theme }) => theme.card_hover || theme.card_light};
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.text_tertiary};
+    box-shadow: ${({ theme }) => theme.shadow_md};
   }
-  
-  &:hover::before {
-    transform: scaleY(1);
-  }
-  
-  &:active {
-    transform: translateY(-2px) scale(0.99);
-    transition: transform 0.1s ease;
-  }
-  
+
   @media (max-width: 768px) {
     padding: 16px;
     gap: 12px;
     width: 100%;
-    
-    &:active {
-      transform: translateY(-4px) scale(0.98);
-      box-shadow: ${({ theme }) => theme.shadow_lg};
-      border-color: ${({ theme }) => theme.primary};
-    }
-    
-    &:active::before {
-      transform: scaleY(1);
-    }
   }
 
   @media (max-width: 480px) {
-    padding: 12px;
+    padding: 14px;
     gap: 10px;
-    border-radius: 12px;
+    border-radius: 10px;
   }
 `;
 
@@ -80,24 +46,18 @@ const Top = styled.div`
 `;
 
 const Image = styled.img`
-  height: 56px;
-  width: 56px;
+  height: 48px;
+  width: 48px;
   background-color: ${({ theme }) => theme.white};
-  border-radius: 12px;
-  margin-top: 4px;
+  border-radius: 10px;
+  margin-top: 2px;
   object-fit: contain;
   padding: 4px;
-  border: 1px solid ${({ theme }) => theme.primary + 20};
-  transition: all 0.3s ease;
-  
-  ${Card}:hover & {
-    transform: scale(1.1);
-    border-color: ${({ theme }) => theme.primary};
-  }
-  
+  border: 1px solid ${({ theme }) => theme.card_border};
+
   @media (max-width: 768px) {
-    height: 44px;
-    width: 44px;
+    height: 40px;
+    width: 40px;
   }
 `;
 
@@ -120,21 +80,21 @@ const TitleSection = styled.div`
 `;
 
 const Role = styled.div`
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
-  margin-bottom: 4px;
-  
+  margin-bottom: 2px;
+
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
 const Company = styled.div`
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary + 99};
-  
+  color: ${({ theme }) => theme.text_secondary};
+
   @media (max-width: 768px) {
     font-size: 13px;
   }
@@ -143,110 +103,95 @@ const Company = styled.div`
 const Date = styled.div`
   font-size: 12px;
   font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary + 80};
-  
+  color: ${({ theme }) => theme.text_tertiary};
+  margin-top: 2px;
+
   @media (max-width: 768px) {
     font-size: 11px;
   }
 `;
 
 const ExpandButton = styled(motion.button)`
-  background: ${({ theme }) => theme.primary_alpha};
-  border: 1px solid ${({ theme }) => theme.primary};
-  border-radius: 8px;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.card_border};
+  border-radius: 6px;
   padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: ${({ theme }) => theme.primary};
-  transition: all 0.2s ease;
+  color: ${({ theme }) => theme.text_tertiary};
+  transition: all 0.15s ease;
   flex-shrink: 0;
-  
-  &:active {
-    transform: scale(0.95);
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
-    transition: transform 0.1s ease;
-  }
-  
+
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }) => theme.text_tertiary};
   }
-  
+
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
 const Description = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
-  color: ${({ theme }) => theme.text_primary + 99};
+  color: ${({ theme }) => theme.text_secondary};
   line-height: 1.6;
-  
+
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
 const Skills = styled.div`
   width: 100%;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 4px;
 `;
 
 const Skill = styled.div`
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text_primary};
-  background: ${({ theme }) => theme.primary + 15};
-  border: 1px solid ${({ theme }) => theme.primary + 30};
-  padding: 4px 10px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background: ${({ theme }) => theme.primary + 25};
-    border-color: ${({ theme }) => theme.primary};
-  }
-  
+  color: ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.bgLight};
+  padding: 3px 8px;
+  border-radius: 4px;
+
   @media (max-width: 768px) {
-    font-size: 12px;
-    padding: 3px 8px;
+    font-size: 11px;
+    padding: 2px 6px;
   }
 `;
 
 const ExpandedContent = styled(motion.div)`
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid ${({ theme }) => theme.card_border};
   overflow: hidden;
 `;
 
 const ImpactSection = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 `;
 
 const SectionTitle = styled.h4`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  
+  gap: 6px;
+
   svg {
     color: ${({ theme }) => theme.primary};
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 15px;
+    width: 15px;
+    height: 15px;
   }
 `;
 
@@ -257,27 +202,23 @@ const ImpactList = styled.ul`
 `;
 
 const ImpactItem = styled(motion.li)`
-  font-size: 14px;
+  font-size: 13px;
   color: ${({ theme }) => theme.text_secondary};
-  padding: 8px 0;
-  padding-left: 24px;
+  padding: 6px 0;
+  padding-left: 20px;
   position: relative;
   line-height: 1.5;
-  
+
   &::before {
-    content: '→';
+    content: '\u2192';
     position: absolute;
     left: 0;
     color: ${({ theme }) => theme.primary};
-    font-weight: bold;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 13px;
+    font-weight: 500;
   }
 `;
 
-const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 }) => {
+const EnhancedExperienceCard = ({ experience, isExpanded, onToggle }) => {
     const handleClick = (e) => {
         e.stopPropagation();
         onToggle();
@@ -288,31 +229,7 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
         onToggle();
     };
 
-    // Enhanced data with impact metrics
-    const impactMetrics = {
-        'Frontend Developer': {
-            impact: [
-                'Built enterprise-grade security dashboards serving 1000+ users',
-                'Improved dashboard load time by 40% through code splitting and lazy loading',
-                'Implemented reusable component library reducing development time by 30%',
-            ],
-            technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Tanstack Query'],
-        },
-        'Software Developer': {
-            impact: [
-                'Developed AML platform processing 10,000+ transactions daily',
-                'Reduced false positives by 15% using ML-based anomaly detection',
-                'Built microservices architecture handling 99.9% uptime',
-                'Optimized database queries improving response time by 50%',
-            ],
-            technologies: ['Spring Boot', 'Angular', 'MySQL', 'Python'],
-        },
-    };
-
-    const details = impactMetrics[experience.role] || {
-        impact: [],
-        technologies: [],
-    };
+    const impactItems = experience.impact || [];
 
     return (
         <Card
@@ -320,7 +237,7 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
             onClick={handleClick}
             layout
             transition={{
-                layout: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                layout: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
             }}
         >
             <Top>
@@ -339,8 +256,7 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
                         </TitleSection>
                         <ExpandButton
                             onClick={handleExpandClick}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
                         </ExpandButton>
@@ -353,38 +269,35 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle, index = 0 })
             {experience.skills && (
                 <Skills>
                     {experience.skills.slice(0, isExpanded ? experience.skills.length : 6).map((skill, index) => (
-                        <Skill key={`${experience.role}-skill-${index}`}>• {skill}</Skill>
+                        <Skill key={`${experience.role}-skill-${index}`}>{skill}</Skill>
                     ))}
                     {!isExpanded && experience.skills.length > 6 && (
-                        <Skill style={{ opacity: 0.7 }}>+{experience.skills.length - 6} more</Skill>
+                        <Skill style={{ opacity: 0.6 }}>+{experience.skills.length - 6} more</Skill>
                     )}
                 </Skills>
             )}
 
             <AnimatePresence>
-                {isExpanded && details.impact.length > 0 && (
+                {isExpanded && impactItems.length > 0 && (
                     <ExpandedContent
                         layout
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ 
-                            duration: 0.3,
-                            ease: [0.4, 0, 0.2, 1]
-                        }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
                     >
                         <ImpactSection>
                             <SectionTitle>
                                 <FiTrendingUp />
-                                Key Impact & Achievements
+                                Key Impact
                             </SectionTitle>
                             <ImpactList>
-                                {details.impact.map((item, i) => (
+                                {impactItems.map((item, i) => (
                                     <ImpactItem
                                         key={i}
-                                        initial={{ opacity: 0, x: -20 }}
+                                        initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.1 }}
+                                        transition={{ delay: i * 0.05 }}
                                     >
                                         {item}
                                     </ImpactItem>
