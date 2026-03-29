@@ -8,16 +8,12 @@ const StyledButton = styled(motion.button)`
   bottom: 32px;
   right: 32px;
   z-index: 1000;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(133, 76, 230, 0.15);
-  border: 1px solid rgba(133, 76, 230, 0.5);
-  color: #854CE6;
+  background: ${({ theme }) => theme.primary_alpha};
+  border: 1px solid ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,13 +22,29 @@ const StyledButton = styled(motion.button)`
   transition: box-shadow 0.2s ease, background 0.2s ease;
 
   &:hover {
-    background: rgba(133, 76, 230, 0.28);
-    box-shadow: 0 0 16px rgba(133, 76, 230, 0.45);
+    background: ${({ theme }) => theme.primary_alpha};
+    box-shadow: ${({ theme }) => theme.shadow_glow};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    bottom: 20px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
   }
 
   svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 `;
 

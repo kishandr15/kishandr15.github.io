@@ -93,7 +93,17 @@ export const ToggleButton = styled.div`
     &:hover {
         ${({ $active, theme }) => !$active && `
             color: ${theme.text_primary};
+            background: ${theme.primary_alpha};
         `}
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.primary};
+        outline-offset: 2px;
     }
 
     @media (max-width: 768px) {

@@ -22,16 +22,24 @@ const Card = styled(motion.div)`
     box-shadow: ${({ theme }) => theme.shadow_md};
   }
 
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
+  }
+
   @media (max-width: 768px) {
-    max-width: 400px;
-    min-height: 240px;
+    max-width: 100%;
+    min-height: 220px;
     padding: 20px;
   }
 
-  @media (max-width: 500px) {
-    max-width: 330px;
-    min-height: 220px;
+  @media (max-width: 480px) {
     padding: 16px;
+    min-height: 200px;
   }
 `;
 
@@ -100,6 +108,7 @@ const SkillItem = styled(motion.div)`
 
   &:hover {
     border-color: ${({ theme }) => theme.text_tertiary};
+    background: ${({ theme }) => theme.card_hover};
   }
 
   @media (max-width: 768px) {
@@ -238,6 +247,10 @@ const SkillShowcase = ({ skill, index, isExpanded, onToggle }) => {
         <Card
             $expanded={isExpanded}
             onClick={handleClick}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), onToggle())}
+            tabIndex={0}
+            role="button"
+            aria-expanded={isExpanded}
             layout
             transition={{
                 layout: { duration: 0.25, ease: 'easeInOut' }

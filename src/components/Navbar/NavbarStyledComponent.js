@@ -21,7 +21,7 @@ export const Nav = styled.nav`
     `}
 
   @media (max-width: 768px) {
-    position: absolute;
+    position: fixed;
     padding: 0;
   }
 `;
@@ -121,6 +121,16 @@ export const NavLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.text_primary};
   }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
+    border-radius: 50px;
+  }
 `;
 
 /* ─── Animated active pill behind the link (rendered by framer-motion layoutId) ─── */
@@ -168,6 +178,15 @@ export const GitHubButton = styled.a`
     color: ${({ theme }) => theme.text_primary};
     border-color: ${({ theme }) => theme.text_tertiary};
     background: ${({ theme }) => theme.primary_alpha};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
   }
 
   @media (max-width: 768px) {
@@ -264,6 +283,16 @@ export const MobileLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.text_primary};
     background: ${({ theme }) => theme.primary_alpha};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
+    border-radius: 12px;
   }
 `;
 

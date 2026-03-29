@@ -98,6 +98,15 @@ const SocialMediaIcon = styled(motion.a)`
     border-color: ${({ theme }) => theme.text_tertiary};
   }
 
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 3px;
+  }
+
   @media (max-width: 480px) {
     width: 38px;
     height: 38px;
@@ -170,6 +179,7 @@ const Footer = () => {
             href={Bio.twitter}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Twitter"
           >
             <TwitterIcon />
           </SocialMediaIcon>
@@ -177,6 +187,7 @@ const Footer = () => {
             href={Bio.linkedin}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
             <LinkedInIcon />
           </SocialMediaIcon>
@@ -184,6 +195,7 @@ const Footer = () => {
             href={Bio.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="WhatsApp"
           >
             <WhatsApp />
           </SocialMediaIcon>

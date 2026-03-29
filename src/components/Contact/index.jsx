@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import emailjs from '@emailjs/browser';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -145,12 +144,14 @@ const StyledWrapper = styled.div`
   .form-container .form-group textarea:focus {
     outline: none;
     border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.primary_alpha};
   }
 
   .form-container .form-submit-btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     font-family: inherit;
     color: ${({ theme }) => theme.white};
     font-weight: 500;
@@ -171,8 +172,31 @@ const StyledWrapper = styled.div`
   }
 
   .form-container .form-submit-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  .form-container .form-submit-btn:focus {
+    outline: none;
+  }
+
+  .form-container .form-submit-btn:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 3px;
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
   @media (max-width: 480px) {
@@ -188,26 +212,38 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const form = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(false);
-    emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-      form.current,
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-    )
-      .then(() => {
+    const raw = Object.fromEntries(new FormData(form.current));
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.REACT_APP_WEB3FORMS_KEY,
+          subject: raw.subject,
+          from_name: raw.from_name,
+          message:
+            `Name:    ${raw.from_name}\n` +
+            `Email:   ${raw.email_id}\n` +
+            `Subject: ${raw.subject}\n\n` +
+            `${raw.message}`,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
         setOpen(true);
         form.current.reset();
-      })
-      .catch(() => {
+      } else {
         setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -227,7 +263,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
-          Feel free to reach out for any questions or opportunities
+          Open to opportunities, collaborations, or interesting conversations - feel free to reach out.
         </Desc>
 
         <motion.div
@@ -256,7 +292,8 @@ const Contact = () => {
                   <textarea required name="message" id="message" rows={10} cols={50} />
                 </div>
                 <button type="submit" className="form-submit-btn" disabled={loading}>
-                  {loading ? 'Sending\u2026' : 'Send Message'}
+                  {loading && <span className="spinner" aria-hidden="true" />}
+                  {loading ? 'Sending…' : 'Send Message'}
                 </button>
               </form>
             </div>

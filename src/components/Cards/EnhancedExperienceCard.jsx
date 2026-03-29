@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { FiChevronDown, FiChevronUp, FiTrendingUp } from 'react-icons/fi';
 
 const Card = styled(motion.div)`
-  width: 650px;
+  width: 100%;
+  max-width: 680px;
   min-height: 180px;
   border-radius: 12px;
   padding: 24px;
@@ -25,10 +26,19 @@ const Card = styled(motion.div)`
     box-shadow: ${({ theme }) => theme.shadow_md};
   }
 
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
+  }
+
   @media (max-width: 768px) {
     padding: 16px;
     gap: 12px;
-    width: 100%;
+    max-width: 100%;
   }
 
   @media (max-width: 480px) {
@@ -235,6 +245,10 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle }) => {
         <Card
             $expanded={isExpanded}
             onClick={handleClick}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), onToggle())}
+            tabIndex={0}
+            role="button"
+            aria-expanded={isExpanded}
             layout
             transition={{
                 layout: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
@@ -257,6 +271,8 @@ const EnhancedExperienceCard = ({ experience, isExpanded, onToggle }) => {
                         <ExpandButton
                             onClick={handleExpandClick}
                             whileTap={{ scale: 0.95 }}
+                            aria-expanded={isExpanded}
+                            aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${experience.company} experience details`}
                         >
                             {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
                         </ExpandButton>

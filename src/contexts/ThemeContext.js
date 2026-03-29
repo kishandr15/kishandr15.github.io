@@ -6,9 +6,8 @@ export const ThemeProvider = ({ children }) => {
     const [mode, setMode] = useState(() => {
         if (typeof window === 'undefined') return 'dark';
         const stored = localStorage.getItem('theme-preference');
-        // Default to 'dark' if no preference or if it was 'system'
-        if (!stored || stored === 'system') return 'dark';
-        return stored;
+        if (stored === 'light') return 'light';
+        return 'dark';
     });
 
     const [resolvedTheme, setResolvedTheme] = useState('dark');

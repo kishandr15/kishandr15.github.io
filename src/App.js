@@ -10,7 +10,7 @@ import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import SEO from "./components/SEO";
 import SkipToMain from "./components/SkipLink";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import React, { Suspense, useEffect } from "react";
 import { trackPageView } from './utils/analytics';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -25,6 +25,12 @@ const Projects = React.lazy(() => import('./components/Projects'));
 const Contact = React.lazy(() => import('./components/Contact'));
 const Footer = React.lazy(() => import('./components/Footer'));
 const BlogPost = React.lazy(() => import('./components/Blog/BlogPost'));
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    background-color: ${({ theme }) => theme.bg};
+  }
+`;
 
 const SkeletonLoader = styled.div`
   min-height: ${({ height }) => height || '400px'};
@@ -108,6 +114,7 @@ const AppContent = () => {
 
   return (
     <StyledThemeProvider theme={currentTheme}>
+      <GlobalStyle />
       <Router>
         <ScrollToHash />
         <SEO />

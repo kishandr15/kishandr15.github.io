@@ -79,12 +79,12 @@ const Projects = ({ openModal, setOpenModal }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <ToggleButtonGroup>
-            <ToggleButton $active={toggle === 'all'} onClick={() => setToggle('all')}>All</ToggleButton>
+          <ToggleButtonGroup role="radiogroup" aria-label="Filter projects by category">
+            <ToggleButton $active={toggle === 'all'} onClick={() => setToggle('all')} role="radio" aria-checked={toggle === 'all'} tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setToggle('all')}>All</ToggleButton>
             <Divider />
-            <ToggleButton $active={toggle === 'web app'} onClick={() => setToggle('web app')}>Web Apps</ToggleButton>
+            <ToggleButton $active={toggle === 'web app'} onClick={() => setToggle('web app')} role="radio" aria-checked={toggle === 'web app'} tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setToggle('web app')}>Web Apps</ToggleButton>
             <Divider />
-            <ToggleButton $active={toggle === 'machine learning'} onClick={() => setToggle('machine learning')}>Machine Learning</ToggleButton>
+            <ToggleButton $active={toggle === 'machine learning'} onClick={() => setToggle('machine learning')} role="radio" aria-checked={toggle === 'machine learning'} tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setToggle('machine learning')}>Machine Learning</ToggleButton>
           </ToggleButtonGroup>
         </motion.div>
 

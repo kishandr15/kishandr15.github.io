@@ -17,6 +17,12 @@ const CTAContainer = styled.div`
   @media (max-width: 640px) {
     justify-content: center;
   }
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
 `;
 
 const Button = styled(motion.a)`
@@ -27,13 +33,20 @@ const Button = styled(motion.a)`
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   cursor: pointer;
   transition: all 0.15s ease;
+  min-height: 44px;
 
   @media (max-width: 768px) {
     padding: 10px 20px;
     font-size: 14px;
+  }
+
+  @media (max-width: 400px) {
+    width: 100%;
+    padding: 12px 20px;
   }
 `;
 

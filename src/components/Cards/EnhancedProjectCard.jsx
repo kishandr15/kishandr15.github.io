@@ -22,6 +22,15 @@ const Card = styled.div`
     box-shadow: ${({ theme }) => theme.shadow_lg};
   }
 
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary};
+    outline-offset: 2px;
+  }
+
   @media (max-width: 768px) {
     max-width: 100%;
     height: auto;
@@ -137,9 +146,15 @@ const Tag = styled.span`
 `;
 
 const EnhancedProjectCard = ({ project, setOpenModal }) => {
+  const handleOpen = () => setOpenModal({ state: true, project });
+
   return (
     <Card
-      onClick={() => setOpenModal({ state: true, project })}
+      onClick={handleOpen}
+      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), handleOpen())}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${project.title}`}
     >
       <ImageContainer>
         <Image

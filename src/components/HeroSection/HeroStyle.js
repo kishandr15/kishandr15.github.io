@@ -11,13 +11,28 @@ export const HeroContainer = styled.div`
   overflow: hidden;
 
   @media (max-width: 960px) {
-    padding: 80px 24px 64px;
+    padding: 100px 24px 64px;
     min-height: auto;
   }
+  @media (max-width: 768px) {
+    padding: 80px 20px 48px;
+  }
   @media (max-width: 640px) {
-    padding: 64px 16px 48px;
+    padding: 72px 16px 40px;
   }
   z-index: 1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, ${({ theme }) => theme.bg});
+    pointer-events: none;
+    z-index: 2;
+  }
 `;
 
 export const HeroBg = styled.div`
@@ -49,6 +64,7 @@ export const HeroInnerContainer = styled.div`
 export const HeroLeftContainer = styled.div`
   width: 100%;
   order: 1;
+
   @media (max-width: 960px) {
     order: 2;
     margin-bottom: 30px;
@@ -65,6 +81,7 @@ export const HeroRightContainer = styled.div`
   justify-content: end;
   gap: 12px;
   position: relative;
+
   @media (max-width: 960px) {
     order: 1;
     justify-content: center;
@@ -154,7 +171,8 @@ export const SubTitle = styled.div`
 
   @media (max-width: 640px) {
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.65;
+    margin-bottom: 24px;
   }
 `;
 

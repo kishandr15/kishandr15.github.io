@@ -14,6 +14,18 @@ const Container = styled.div`
   align-items: center;
   padding: 80px 24px;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, ${({ theme }) => theme.bg}, transparent);
+    pointer-events: none;
+    z-index: 2;
+  }
+
   @media (max-width: 768px) {
     padding: 64px 16px;
   }
